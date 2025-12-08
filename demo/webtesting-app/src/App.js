@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from 'react';
+import './App.scss';
+import Header from './Components/Header/Header';
+import SideBar from './Components/SideBar/SideBar';
+import { CONTENT_MAPPING, TUTORIAL_CONTENT_HEADINGS } from './constant';
+import Content from './Components/Content/Content';
 
 function App() {
+  const [currentActiveTab, setCurrentActiveTab] = useState("introduction");
+
+  const handleTabChange = useCallback((value) => {
+    setCurrentActiveTab(value);
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div className='applicationBody'>
+      <div className='applicationSideNav'>
+      <SideBar tabs={TUTORIAL_CONTENT_HEADINGS} currentActiveTab={currentActiveTab} onChangeTab={handleTabChange}/>
+      </div>
+      <div className='applicationContent'>
+        <Content content={CONTENT_MAPPING[currentActiveTab]}/>
+      </div>
+      </div>
     </div>
   );
 }

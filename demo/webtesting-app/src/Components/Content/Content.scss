@@ -1,0 +1,87 @@
+.contentWrapper {
+  width: 100%;
+  height: 100%;
+
+  .content {
+    width: 100%;
+    height: 90%;
+    .contentTitle {
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+
+      padding-left: 2rem;
+      border-bottom: 0.2rem solid black;
+      .contentTitleText {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: black;
+      }
+    }
+
+    .contentParagraphs {
+      width: 100%;
+      height: auto;
+      padding: 2rem;
+      line-height: 1.5;
+      font-size: 1.1rem;
+    }
+
+    .contentBullets {
+      width: 100%;
+      height: auto;
+      padding: 2rem;
+      line-height: 1.5;
+      font-size: 1.1rem;
+    }
+
+    .contentSections {
+      width: 100%;
+      height: auto;
+      padding: 2rem;
+      line-height: 1.5;
+      font-size: 1.1rem;
+    }
+
+    .contentSubtitle {
+      font-weight: bold;
+    }
+  }
+
+  .footer {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 2rem;
+    margin-bottom: 1rem;
+    border-top: 0.2rem solid black;
+    gap: 1rem;
+
+    .previousButton {
+      border: none;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      height: 2.5rem;
+      width: 8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nextButton {
+      height: 2.5rem;
+      width: 8rem;
+      border: none;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
