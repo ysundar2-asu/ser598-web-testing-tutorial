@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import "./HomePage.scss";
 import { Button, Drawer, Dropdown, Modal, Select } from "antd";
 import { AUTH_USER_API, GET_PRODUCTS_API, PRODUCT_CATEGORIES } from "../../../constant";
-import ProductCard from "../../ProductCard/ProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 
 export default function HomePage() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -60,6 +60,24 @@ export default function HomePage() {
       });
     }
   }, [username, password, setShowLoginModal]);
+
+  const handleAddToCart = useCallback((product, quantity) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        );
+      }
+      return [...prevItems, { ...product, quantity }];
+    });
+  }, []);
+
+  const handleRemoveFromCart = useCallback((productId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+  }, []);
   return <div className="homePage">
     <div className="eCommerceHeader">
        <div className="leftSection">
@@ -82,7 +100,7 @@ export default function HomePage() {
             
         </div>
         <div className="productList">
-          {filteredProductList.map((product) => <ProductCard key={product.id} {...product} />)}
+          {filteredProductList.map((product) => <ProductCard key={product.id} {...product} onAddToCart={handleAddToCart} />)}
         </div>
     </div>
     <Modal title="Login" open={showLoginModal} onCancel={() => setShowLoginModal(false)} className="loginModal" footer={null}>
@@ -97,20 +115,28 @@ export default function HomePage() {
       open={showCartDrawer}
       onClose={() => setShowCartDrawer(false)}
       className="cartDrawer"
+      width={500}
     >
       <div className="cartDrawerContent">
         {cartItems.length === 0 ? (
           <p className="emptyCart">Your cart is empty</p>
         ) : (
-          cartItems.map((item) => (
-            <div key={item.id} className="cartItem">
-              <img src={item.image} alt={item.title} />
-              <div className="cartItemDetails">
-                <span className="cartItemTitle">{item.title}</span>
-                <span className="cartItemPrice">${item.price}</span>
+          <>
+            {cartItems.map((item) => (
+              <div key={item.id} className="cartItem">
+                <img src={item.image} alt={item.title} />
+                <div className="cartItemDetails">
+                  <span className="cartItemTitle">{item.title}</span>
+                  <span className="cartItemPrice">${item.price} x {item.quantity}</span>
+                </div>
+                <Button className="removeButton" onClick={() => handleRemoveFromCart(item.id)}>Remove</Button>
               </div>
+            ))}
+            <div className="cartTotal">
+              <span>Total:</span>
+              <span className="totalAmount">${cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}</span>
             </div>
-          ))
+          </>
         )}
       </div>
     </Drawer>
