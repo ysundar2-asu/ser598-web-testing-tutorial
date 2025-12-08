@@ -1,12 +1,20 @@
-export const TEAM_MEMEBERS_LIST = [{
-    id: 1, name: "Yashwanth Sundhar Sundaramoorthy", asuID: '1233862554'
-},
-{
-    id: 2, name: "Tejeshwar Moongilmada Krishnaswamy", asuID: '1233862554'
-}, 
-{
-    id: 3, name: "Sai Krishnan", asuID: '1233862554'
-}];
+export const TEAM_MEMEBERS_LIST = [
+  {
+    id: 1,
+    name: "Yashwanth Sundhar Sundaramoorthy",
+    asuID: "1233862554",
+  },
+  {
+    id: 2,
+    name: "Tejeshwar Moongilmada Krishnaswamy",
+    asuID: "1233862554",
+  },
+  {
+    id: 3,
+    name: "Sai Krishnan",
+    asuID: "1233862554",
+  },
+];
 
 export const TUTORIAL_CONTENT_HEADINGS = [
   { id: 1, title: "Introduction", mapId: "introduction" },
@@ -16,14 +24,27 @@ export const TUTORIAL_CONTENT_HEADINGS = [
   { id: 5, title: "Tools Overview", mapId: "tools_overview" },
   { id: 6, title: "React App Setup Instructions", mapId: "react_setup" },
   { id: 7, title: "Jest Unit Testing", mapId: "jest_unit_testing" },
-  { id: 8, title: "React Testing Library (RTL)", mapId: "rtl_component_testing" },
-  { id: 9, title: "Playwright End-to-End Testing", mapId: "playwright_testing" },
-  { id: 10, title: "Lighthouse Performance & Accessibility", mapId: "lighthouse_testing" },
+  {
+    id: 8,
+    title: "React Testing Library (RTL)",
+    mapId: "rtl_component_testing",
+  },
+  {
+    id: 9,
+    title: "Playwright End-to-End Testing",
+    mapId: "playwright_testing",
+  },
+  {
+    id: 10,
+    title: "Lighthouse Performance & Accessibility",
+    mapId: "lighthouse_testing",
+  },
   { id: 11, title: "Postman API Testing", mapId: "postman_testing" },
   { id: 12, title: "History of Web Testing", mapId: "testing_history" },
   { id: 13, title: "Analytical Component (Pros & Cons)", mapId: "analysis" },
   { id: 14, title: "References", mapId: "references" },
   { id: 15, title: "Additional Resources", mapId: "additional_resources" },
+  { id: 16, title: "Demo - ECommerce Website", mapId: "demo" },
 ];
 
 export const CONTENT_MAPPING = {
@@ -41,21 +62,22 @@ export const CONTENT_MAPPING = {
           "To verify functionality, performance, and reliability",
           "To make the UI colorful",
           "To reduce developer effort",
-          "To avoid writing comments"
+          "To avoid writing comments",
         ],
         answer: 0,
-        id: 1
+        id: 1,
       },
       {
-        question: "True or False: Manual testing alone is enough for modern applications.",
+        question:
+          "True or False: Manual testing alone is enough for modern applications.",
         options: ["True", "False"],
         answer: 1,
-        id: 2
-      }
+        id: 2,
+      },
     ],
     type: "paragraphs",
     isQuizCompleted: false,
-    isPreviousButtonDisabled: true
+    isPreviousButtonDisabled: true,
   },
 
   learning_outcomes: {
@@ -69,21 +91,22 @@ export const CONTENT_MAPPING = {
       "Run end-to-end tests using Playwright.",
       "Perform performance & accessibility audits with Lighthouse.",
       "Validate backend APIs using Postman.",
-      "Analyze strengths and limitations of modern testing tools."
+      "Analyze strengths and limitations of modern testing tools.",
     ],
     quiz: [
       {
-        question: "Which of the following is a learning outcome of this tutorial?",
+        question:
+          "Which of the following is a learning outcome of this tutorial?",
         options: [
           "Understand how to deploy Kubernetes clusters",
           "Write and execute tests using Jest and Playwright",
           "Build a game using Unity",
-          "Design a backend using Java"
+          "Design a backend using Java",
         ],
         answer: 1,
-      }
+      },
     ],
-    type: "bullets"
+    type: "bullets",
   },
 
   web_testing_overview: {
@@ -91,7 +114,7 @@ export const CONTENT_MAPPING = {
     paragraphs: [
       "Web testing is the process of verifying that a web application works as intended across functionality, performance, security, usability, and accessibility dimensions.",
       "Testing ensures correctness, stability, and user satisfaction by detecting errors early and preventing regressions.",
-      "Modern web testing covers several layers — from individual functions to full user flows across browsers."
+      "Modern web testing covers several layers — from individual functions to full user flows across browsers.",
     ],
     quiz: [
       {
@@ -100,13 +123,13 @@ export const CONTENT_MAPPING = {
           "Correctness and stability",
           "Better color themes",
           "More animations",
-          "The website always uses dark mode"
+          "The website always uses dark mode",
         ],
         answer: 0,
-      }
+      },
     ],
     type: "paragraphs",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   testing_types: {
@@ -135,42 +158,68 @@ export const CONTENT_MAPPING = {
       {
         subtitle: "API Testing",
         text: "Checks API response correctness and error handling using Postman.",
-      }
+      },
     ],
     quiz: [
       {
-        question: "Which type of testing simulates a real user in a real browser?",
-        options: ["Unit Testing", "Component Testing", "End-to-End Testing", "API Testing"],
+        question:
+          "Which type of testing simulates a real user in a real browser?",
+        options: [
+          "Unit Testing",
+          "Component Testing",
+          "End-to-End Testing",
+          "API Testing",
+        ],
         answer: 2,
       },
       {
         question: "Which testing type focuses on checking API responses?",
-        options: ["Performance Testing", "API Testing", "Accessibility Testing", "Visual Testing"],
-        answer: 1
-      }
+        options: [
+          "Performance Testing",
+          "API Testing",
+          "Accessibility Testing",
+          "Visual Testing",
+        ],
+        answer: 1,
+      },
     ],
     type: "sections",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   tools_overview: {
     title: "Tools Overview",
     sections: [
-      { subtitle: "Jest", text: "Jest is a fast JavaScript test runner used for unit and integration testing." },
-      { subtitle: "React Testing Library", text: "RTL helps test components from the user's perspective without focusing on implementation details." },
-      { subtitle: "Playwright", text: "Playwright runs end-to-end tests in Chromium, Firefox, and WebKit with auto-waiting features." },
-      { subtitle: "Lighthouse", text: "Lighthouse measures performance, accessibility, SEO, and best practices from within Chrome DevTools." },
-      { subtitle: "Postman", text: "Postman helps send API requests and write assertions to verify backend behavior." }
+      {
+        subtitle: "Jest",
+        text: "Jest is a fast JavaScript test runner used for unit and integration testing.",
+      },
+      {
+        subtitle: "React Testing Library",
+        text: "RTL helps test components from the user's perspective without focusing on implementation details.",
+      },
+      {
+        subtitle: "Playwright",
+        text: "Playwright runs end-to-end tests in Chromium, Firefox, and WebKit with auto-waiting features.",
+      },
+      {
+        subtitle: "Lighthouse",
+        text: "Lighthouse measures performance, accessibility, SEO, and best practices from within Chrome DevTools.",
+      },
+      {
+        subtitle: "Postman",
+        text: "Postman helps send API requests and write assertions to verify backend behavior.",
+      },
     ],
     quiz: [
       {
         question: "Which tool do we use for E2E browser automation?",
         options: ["Jest", "React Testing Library", "Playwright", "Postman"],
         answer: 2,
-      }
+      },
     ],
     type: "sections",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   react_setup: {
@@ -179,17 +228,17 @@ export const CONTENT_MAPPING = {
       "Clone the repository and navigate to the `webtesting-app` directory.",
       "Run `npm install` to install dependencies.",
       "Start the application using `npm start`.",
-      "Understand the folder structure: components, pages, tests, and utilities."
+      "Understand the folder structure: components, pages, tests, and utilities.",
     ],
     quiz: [
       {
         question: "Which command installs dependencies in a React project?",
         options: ["npm build", "npm install", "npm compile", "npm create"],
-        answer: 1
-      }
+        answer: 1,
+      },
     ],
     type: "paragraphs",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   jest_unit_testing: {
@@ -197,17 +246,17 @@ export const CONTENT_MAPPING = {
     paragraphs: [
       "Jest provides functions such as `test()`, `expect()`, and matchers to validate logic.",
       "Unit tests should run fast and independently of external APIs.",
-      "Snapshots and mock functions help isolate logic and test behavior."
+      "Snapshots and mock functions help isolate logic and test behavior.",
     ],
     quiz: [
       {
         question: "Which Jest function is used for making assertions?",
         options: ["assert()", "expect()", "verify()", "check()"],
-        answer: 1
-      }
+        answer: 1,
+      },
     ],
     type: "paragraphs",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   rtl_component_testing: {
@@ -215,17 +264,17 @@ export const CONTENT_MAPPING = {
     paragraphs: [
       "RTL focuses on testing components the way users interact with them.",
       "Queries such as `getByText`, `getByRole`, and `getByLabelText` simulate accessibility-based selection.",
-      "RTL avoids testing implementation details and ensures future-proof tests."
+      "RTL avoids testing implementation details and ensures future-proof tests.",
     ],
     quiz: [
       {
         question: "Which RTL function is used to render a component?",
         options: ["mount()", "display()", "render()", "inject()"],
-        answer: 2
-      }
+        answer: 2,
+      },
     ],
     type: "paragraphs",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   playwright_testing: {
@@ -233,17 +282,17 @@ export const CONTENT_MAPPING = {
     paragraphs: [
       "Playwright automates browsers to simulate real user flows such as login, navigation, and form submission.",
       "`page.goto()`, `page.click()`, and `page.fill()` are commonly used APIs.",
-      "Playwright supports auto-waiting, screenshots, videos, and parallel test execution."
+      "Playwright supports auto-waiting, screenshots, videos, and parallel test execution.",
     ],
     quiz: [
       {
         question: "Which command opens a URL in Playwright?",
         options: ["page.open()", "page.visit()", "page.goto()", "page.load()"],
-        answer: 2
-      }
+        answer: 2,
+      },
     ],
     type: "paragraphs",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   lighthouse_testing: {
@@ -251,17 +300,18 @@ export const CONTENT_MAPPING = {
     paragraphs: [
       "Lighthouse provides metrics such as Largest Contentful Paint (LCP), Total Blocking Time (TBT), and First Input Delay (FID).",
       "It also scores accessibility by checking labels, contrast, ARIA attributes, and keyboard usability.",
-      "Performance and accessibility directly impact user satisfaction."
+      "Performance and accessibility directly impact user satisfaction.",
     ],
     quiz: [
       {
-        question: "Which Lighthouse metric measures loading speed of main content?",
+        question:
+          "Which Lighthouse metric measures loading speed of main content?",
         options: ["FID", "CLS", "LCP", "TBT"],
-        answer: 2
-      }
+        answer: 2,
+      },
     ],
     type: "paragraphs",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   postman_testing: {
@@ -269,17 +319,17 @@ export const CONTENT_MAPPING = {
     paragraphs: [
       "Postman allows you to send GET, POST, PUT, and DELETE requests to APIs.",
       "You can write JavaScript tests using `pm.test()` to validate status codes and responses.",
-      "Collections organize API calls into reusable groups."
+      "Collections organize API calls into reusable groups.",
     ],
     quiz: [
       {
         question: "Which HTTP method retrieves data?",
         options: ["POST", "GET", "DELETE", "PATCH"],
-        answer: 1
-      }
+        answer: 1,
+      },
     ],
     type: "paragraphs",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   testing_history: {
@@ -292,13 +342,14 @@ export const CONTENT_MAPPING = {
     ],
     quiz: [
       {
-        question: "Which tool was one of the earliest browser automation frameworks?",
+        question:
+          "Which tool was one of the earliest browser automation frameworks?",
         options: ["Jest", "Lighthouse", "Selenium", "Postman"],
-        answer: 2
-      }
+        answer: 2,
+      },
     ],
     type: "paragraphs",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   analysis: {
@@ -306,26 +357,31 @@ export const CONTENT_MAPPING = {
     sections: [
       {
         subtitle: "Strengths",
-        text: "Automated tests improve reliability, speed up development, ensure accessibility, and support CI/CD pipelines."
+        text: "Automated tests improve reliability, speed up development, ensure accessibility, and support CI/CD pipelines.",
       },
       {
         subtitle: "Weaknesses",
-        text: "Tests can be flaky, expensive to maintain, and require learning multiple tools."
+        text: "Tests can be flaky, expensive to maintain, and require learning multiple tools.",
       },
       {
         subtitle: "Future Directions",
-        text: "AI-powered test generation, self-healing selectors, and real-user monitoring."
-      }
+        text: "AI-powered test generation, self-healing selectors, and real-user monitoring.",
+      },
     ],
     quiz: [
       {
         question: "Which is a disadvantage of E2E tests?",
-        options: ["They are extremely fast", "They need no setup", "They can be flaky", "They replace all unit tests"],
-        answer: 2
-      }
+        options: [
+          "They are extremely fast",
+          "They need no setup",
+          "They can be flaky",
+          "They replace all unit tests",
+        ],
+        answer: 2,
+      },
     ],
     type: "sections",
-    isQuizCompleted: false
+    isQuizCompleted: false,
   },
 
   references: {
@@ -336,10 +392,10 @@ export const CONTENT_MAPPING = {
       "Playwright Official Docs",
       "Chrome DevTools Lighthouse Guide",
       "Postman Learning Center",
-      "WCAG Accessibility Standards"
+      "WCAG Accessibility Standards",
     ],
     quiz: [],
-    type: "bullets"
+    type: "bullets",
   },
 
   additional_resources: {
@@ -349,10 +405,27 @@ export const CONTENT_MAPPING = {
       "Google Web.dev Performance Articles",
       "Playwright Video Tutorials",
       "Jest Testing Examples",
-      "Public Postman API Collections"
+      "Public Postman API Collections",
     ],
     quiz: [],
-    type: "bullets"
-  }
+    type: "bullets",
+  },
+  demo: {
+    title: "Demo - ECommerce Website",
+    type: "component",
+  },
 };
 
+export const GET_PRODUCTS_API = "https://fakestoreapi.com/products";
+export const GET_SINGLE_PRODUCT_API = `https://fakestoreapi.com/products/{productId}`;
+export const AUTH_USER_API = "https://fakestoreapi.com/auth/login";
+export const ADD_TO_CART_API = "https://fakestoreapi.com/carts";
+export const GET_CART_API = "https://fakestoreapi.com/carts/{cartId}";
+
+export const PRODUCT_CATEGORIES = [
+  { id: 0, label: "All", value: "all" },
+  { id: 1, label: "Men's Clothing", value: "men's clothing" },
+  { id: 2, label: "Women's Clothing", value: "women's clothing" },
+  { id: 3, label: "Jewelery", value: "jewelery" },
+  { id: 4, label: "Electronics", value: "electronics" },
+];

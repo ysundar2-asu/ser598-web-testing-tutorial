@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from "react";
 import "./Content.scss";
 import { Button, Modal, Radio } from "antd";
+import HomePage from "../ECommerce/HomePage/HomePage";
 
 export default function Content(props) {
-  const { content } = props;
+  const { content, currentActiveTab, tabs, onChangeTab, onTopicComplete } = props;
   const {
     title,
     paragraphs,
@@ -20,14 +21,29 @@ export default function Content(props) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
 
+  const shouldShowQuiz = type !== "component" && quiz && quiz.length > 0;
+
+  const goToNextTopic = useCallback(() => {
+    onTopicComplete(currentActiveTab);
+
+    const currentIndex = tabs.findIndex(
+      (tab) => tab.mapId === currentActiveTab
+    );
+    if (currentIndex < tabs.length - 1) {
+      const nextTab = tabs[currentIndex + 1];
+      onChangeTab(nextTab.mapId);
+    }
+  }, [currentActiveTab, tabs, onChangeTab, onTopicComplete]);
+
   const handleNextClick = useCallback(() => {
-    if (quiz && !isQuizCompleted) {
+    if (quiz && quiz.length > 0 && !isQuizCompleted) {
       setOpenQuiz(true);
       setCurrentQuestionIndex(0);
       setScore(0);
     } else {
+      goToNextTopic();
     }
-  }, [isQuizCompleted, quiz]);
+  }, [isQuizCompleted, quiz, goToNextTopic]);
 
   const handleNextQuestion = useCallback(() => {
     const currentQuestion = quiz[currentQuestionIndex];
@@ -35,7 +51,7 @@ export default function Content(props) {
       const correctAnswerIndex = currentQuestion.answer;
       const correctAnswer = currentQuestion.options[correctAnswerIndex];
       if (selectedAnswer === correctAnswer) {
-        setScore(prevScore => prevScore + 1);
+        setScore((prevScore) => prevScore + 1);
       }
     }
 
@@ -46,8 +62,9 @@ export default function Content(props) {
       setOpenQuiz(false);
       setCurrentQuestionIndex(0);
       setSelectedAnswer(null);
+      goToNextTopic();
     }
-  }, [currentQuestionIndex, quiz, selectedAnswer]);
+  }, [currentQuestionIndex, quiz, selectedAnswer, goToNextTopic]);
 
   const handleCloseQuiz = useCallback(() => {
     setOpenQuiz(false);
@@ -87,6 +104,11 @@ export default function Content(props) {
             ))}
           </div>
         )}
+        {type === "component" && (
+          <div className="contentComponent">
+            <HomePage />
+          </div>
+        )}
       </div>
       <div className="footer">
         <Button className="previousButton" disabled={isPreviousButtonDisabled}>
@@ -97,38 +119,61 @@ export default function Content(props) {
         </Button>
       </div>
 
-      <Modal
-      title={`Quiz - Question ${currentQuestionIndex + 1} of ${quiz.length}`}
-      open={openQuiz}
-      footer={[
-        <Button key="back" onClick={handleCloseQuiz}>
-          Close
-        </Button>,
-        <Button key="next" type="primary" onClick={handleNextQuestion}>
-          {currentQuestionIndex < quiz.length - 1 ? 'Next' : 'Finish'}
-        </Button>,
-        <Button key="skip" onClick={handleNextQuestion}>
-          Skip
-        </Button>
-      ]}
-      >
-      <div style={{ marginBottom: '16px', padding: '8px', backgroundColor: '#f0f5ff', borderRadius: '4px' }}>
-        <strong>Score: {score} / {quiz.length}</strong>
-      </div>
-      {quiz[currentQuestionIndex] && (
-        <div>
-          <p>{quiz[currentQuestionIndex].question}</p>
-          <Radio.Group
-            onChange={(e) => setSelectedAnswer(e.target.value)}
-            value={selectedAnswer}
-            style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
+      {shouldShowQuiz && (
+        <Modal
+          title={`Quiz - Question ${currentQuestionIndex + 1} of ${
+            quiz?.length
+          }`}
+          open={openQuiz}
+          onCancel={handleCloseQuiz}
+          footer={[
+            <Button
+              key="back"
+              onClick={handleCloseQuiz}
+              disabled={currentQuestionIndex === 0}
+            >
+              Previous
+            </Button>,
+            <Button
+              key="next"
+              type="primary"
+              onClick={handleNextQuestion}
+              disabled={selectedAnswer === null}
+            >
+              {currentQuestionIndex < quiz?.length - 1 ? "Next" : "Finish"}
+            </Button>,
+          ]}
+        >
+          <div
+            style={{
+              marginBottom: "16px",
+              padding: "8px",
+              backgroundColor: "#f0f5ff",
+              borderRadius: "4px",
+            }}
           >
-            {quiz[currentQuestionIndex].options.map((option, index) => (
-              <Radio key={index} value={option}>{option}</Radio>
-            ))}
-          </Radio.Group>
-        </div>
-      )}</Modal>
+            <strong>
+              Score: {score} / {quiz?.length}
+            </strong>
+          </div>
+          {quiz[currentQuestionIndex] && (
+            <div>
+              <p>{quiz[currentQuestionIndex].question}</p>
+              <Radio.Group
+                onChange={(e) => setSelectedAnswer(e.target.value)}
+                value={selectedAnswer}
+                style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+              >
+                {quiz[currentQuestionIndex].options.map((option, index) => (
+                  <Radio key={index} value={option}>
+                    {option}
+                  </Radio>
+                ))}
+              </Radio.Group>
+            </div>
+          )}
+        </Modal>
+      )}
     </div>
   );
 }

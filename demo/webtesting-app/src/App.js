@@ -7,19 +7,36 @@ import Content from './Components/Content/Content';
 
 function App() {
   const [currentActiveTab, setCurrentActiveTab] = useState("introduction");
+  const [completedTopics, setCompletedTopics] = useState([]);
 
   const handleTabChange = useCallback((value) => {
     setCurrentActiveTab(value);
   }, []);
+
+  const handleTopicComplete = useCallback((topicId) => {
+    setCompletedTopics((prev) => {
+      if (!prev.includes(topicId)) {
+        return [...prev, topicId];
+      }
+      return prev;
+    });
+  }, []);
+
   return (
     <div className="App">
       <Header />
       <div className='applicationBody'>
       <div className='applicationSideNav'>
-      <SideBar tabs={TUTORIAL_CONTENT_HEADINGS} currentActiveTab={currentActiveTab} onChangeTab={handleTabChange}/>
+      <SideBar tabs={TUTORIAL_CONTENT_HEADINGS} currentActiveTab={currentActiveTab} onChangeTab={handleTabChange} completedTopics={completedTopics}/>
       </div>
       <div className='applicationContent'>
-        <Content content={CONTENT_MAPPING[currentActiveTab]}/>
+        <Content
+          content={CONTENT_MAPPING[currentActiveTab]}
+          currentActiveTab={currentActiveTab}
+          tabs={TUTORIAL_CONTENT_HEADINGS}
+          onChangeTab={handleTabChange}
+          onTopicComplete={handleTopicComplete}
+        />
       </div>
       </div>
     </div>
