@@ -3,8 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('E-Commerce Application - E2E Tests', () => {
   
   test.beforeEach(async ({ page }) => {
-    // Navigate to the application (uses baseURL from playwright.config.js)
-    await page.goto('/');
+    await page.goto('/'); // open local server
 
     // Navigate to the Demo - ECommerce Website section via sidebar
     await page.click('text=Demo - ECommerce Website');
@@ -89,24 +88,6 @@ test.describe('E-Commerce Application - E2E Tests', () => {
       // Filtered count should be less than or equal to initial count
       expect(filteredCount).toBeLessThanOrEqual(initialCount);
     });
-
-    // test('should show all products when "All" category is selected', async ({ page }) => {
-    //   // First filter by a specific category
-    //   await page.click('[data-testid="category-select"]');
-    //   await page.waitForSelector('.ant-select-dropdown', { state: 'visible' });
-    //   await page.click('.ant-select-item-option:has-text("Electronics")');
-    //   await page.waitForTimeout(500);
-
-    //   // Then select "All" category
-    //   await page.click('[data-testid="category-select"]');
-    //   await page.waitForSelector('.ant-select-dropdown', { state: 'visible' });
-    //   await page.click('.ant-select-item-option:has-text("All")');
-    //   await page.waitForTimeout(500);
-
-    //   // Should display multiple products
-    //   const productCount = await page.locator('.productCard').count();
-    //   expect(productCount).toBeGreaterThan(1);
-    // });
   });
 
   test.describe('Product Details Modal', () => {

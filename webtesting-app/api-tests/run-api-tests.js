@@ -39,24 +39,23 @@ console.log('Starting API Tests...\n');
 
 newman.run(options, function (err, summary) {
   if (err) {
-    console.error('Newman run failed:', err);
+    console.error('Newman run environment failed:', err); // error message
     process.exit(1);
   }
 
   const { stats } = summary.run;
   
   console.log('\n Test Results Summary:');
-  console.log('========================');
   console.log(`Total Requests: ${stats.requests.total}`);
   console.log(`Failed Requests: ${stats.requests.failed}`);
   console.log(`Total Assertions: ${stats.assertions.total}`);
   console.log(`Failed Assertions: ${stats.assertions.failed}`);
   
   if (stats.assertions.failed > 0) {
-    console.log('\n Some tests failed!');
+    console.log('\n Some tests cases failed!');
     process.exit(1);
   } else {
-    console.log('\n All tests passed!');
+    console.log('\n All tests passed successfully!');
     process.exit(0);
   }
 });

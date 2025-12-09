@@ -25,6 +25,7 @@ export default function Content(props) {
   const [score, setScore] = useState(0);
 
   const shouldShowQuiz = type !== "component" && quiz && quiz.length > 0;
+  const isNextButtonDisabled = type === "component";
 
   const goToNextTopic = useCallback(() => {
     onTopicComplete(currentActiveTab);
@@ -37,6 +38,16 @@ export default function Content(props) {
       onChangeTab(nextTab.mapId);
     }
   }, [currentActiveTab, tabs, onChangeTab, onTopicComplete]);
+
+  const gotoPreviousTopic = useCallback(() => {
+    const currentIndex = tabs.findIndex(
+      (tab) => tab.mapId === currentActiveTab
+    );
+    if (currentIndex > 0) {
+      const prevTab = tabs[currentIndex - 1];
+      onChangeTab(prevTab.mapId);
+    }
+  }, [currentActiveTab, tabs, onChangeTab]);
 
   const handleNextClick = useCallback(() => {
     if (quiz && quiz.length > 0 && !isQuizCompleted) {
@@ -68,6 +79,10 @@ export default function Content(props) {
       goToNextTopic();
     }
   }, [currentQuestionIndex, quiz, selectedAnswer, goToNextTopic]);
+
+  const handlePreviousClick = useCallback(() => {
+    gotoPreviousTopic();
+  }, [gotoPreviousTopic]);
 
   const handleCloseQuiz = useCallback(() => {
     setOpenQuiz(false);
@@ -105,26 +120,34 @@ export default function Content(props) {
                   <div key={index} className="sectionItem">
                     <span className="contentSubtitle">{data.subtitle}</span>
                     <p>{data.text}</p>
-                    {data.example && !data.image && (
-                      <div className="exampleBlock">
-                        <span className="exampleText">{data.example}</span>
+                    {data.example && (
+                      <div className="codeBlock">
+                        <pre><code>{data.example}</code></pre>
                       </div>
                     )}
-                    {(data.code || data.image) && (
-                      <div className="sectionExampleContent">
-                        {data.code && (
-                          <div className="codeBlock">
-                            <pre><code>{data.code}</code></pre>
-                          </div>
+                    {data.code && (
+                      <div className="codeBlock">
+                        <pre><code>{data.code}</code></pre>
+                      </div>
+                    )}
+                    {data.image && (
+                      <div className="sectionImage">
+                        <img src={data.image} alt={data.imageAlt || data.subtitle || "Section example"} />
+                        {data.imageCaption && (
+                          <p className="imageCaption">{data.imageCaption}</p>
                         )}
-                        {data.image && (
-                          <div className="sectionImage">
-                            <img src={data.image} alt={data.imageAlt || data.subtitle || "Section example"} />
-                            {data.imageCaption && (
-                              <p className="imageCaption">{data.imageCaption}</p>
+                      </div>
+                    )}
+                    {data.images && (
+                      <div className="imagesGrid">
+                        {data.images.map((img, imgIndex) => (
+                          <div key={imgIndex} className="imageItem">
+                            <img src={img.src} alt={img.alt || `Image ${imgIndex + 1}`} />
+                            {img.caption && (
+                              <p className="imageCaption">{img.caption}</p>
                             )}
                           </div>
-                        )}
+                        ))}
                       </div>
                     )}
                   </div>
@@ -168,7 +191,7 @@ export default function Content(props) {
                 <ul>
                   {links.map((link, index) => (
                     <li key={index}>
-                      <a href={link.url} target="_blank" rel="noopener noreferrer">
+                      <a href={link.url}>
                         {link.label}
                       </a>
                     </li>
@@ -185,10 +208,10 @@ export default function Content(props) {
         )}
       </div>
       <div className="footer">
-        <Button className="previousButton" disabled={isPreviousButtonDisabled}>
+        <Button className="previousButton" disabled={isPreviousButtonDisabled} onClick={() => handlePreviousClick()}>
           Previous
         </Button>
-        <Button className="nextButton" onClick={() => handleNextClick()}>
+        <Button className="nextButton" disabled={isNextButtonDisabled} onClick={() => handleNextClick()}>
           Next
         </Button>
       </div>

@@ -22,9 +22,12 @@ function App() {
     });
   }, []);
 
+
+  const totalTopics = TUTORIAL_CONTENT_HEADINGS.length - 1;
+
   return (
     <div className="App">
-      <Header completedTopics={completedTopics} totalTopics={TUTORIAL_CONTENT_HEADINGS.length} />
+      <Header completedTopics={completedTopics} totalTopics={totalTopics} />
       <div className='applicationBody'>
       <div className='applicationSideNav'>
       <SideBar tabs={TUTORIAL_CONTENT_HEADINGS} currentActiveTab={currentActiveTab} onChangeTab={handleTabChange} completedTopics={completedTopics}/>

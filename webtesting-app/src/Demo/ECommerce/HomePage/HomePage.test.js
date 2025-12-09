@@ -81,8 +81,6 @@ describe('HomePage Component', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Product 1')).toBeInTheDocument();
-      // expect(screen.getByText('Product 2')).toBeInTheDocument();
-      // expect(screen.getByText('Product 3')).toBeInTheDocument();
     });
   });
 
@@ -127,7 +125,7 @@ describe('HomePage Component', () => {
 
 
 
-  // Test 10: Adds product to cart
+  // Test 9: Adds product to cart
   test('adds product to cart when Add to Cart is clicked', async () => {
     render(<HomePage />);
 
@@ -148,7 +146,7 @@ describe('HomePage Component', () => {
     });
   });
 
-  // Test 11: Displays cart items when cart drawer is opened
+  // Test 10: Displays cart items when cart drawer is opened
   test('displays cart items in drawer after adding to cart', async () => {
     render(<HomePage />);
 
@@ -166,14 +164,13 @@ describe('HomePage Component', () => {
       fireEvent.click(cartButton);
     });
 
-    // Verify cart item is displayed
     await waitFor(() => {
       expect(screen.getByText('Shopping Cart')).toBeInTheDocument();
       expect(screen.queryByText('Your cart is empty')).not.toBeInTheDocument();
     });
   });
 
-  // Test 12: Removes item from cart
+  // Test 11: Removes item from cart
   test('removes item from cart when Remove button is clicked', async () => {
     render(<HomePage />);
 
@@ -203,7 +200,7 @@ describe('HomePage Component', () => {
     });
   });
 
-  // Test 13: Calculates cart total correctly
+  // Test 12: Calculates cart total correctly
   test('calculates and displays cart total correctly', async () => {
     render(<HomePage />);
 
@@ -231,33 +228,8 @@ describe('HomePage Component', () => {
     expect(priceElements[priceElements.length - 1]).toBeInTheDocument();
   });
 
-  // // Test 14: Handles login with username and password
-  // test('handles login form submission', async () => {
-  //   render(<HomePage />);
-
-  //   // Click Login button
-  //   const loginButton = screen.getByText('Login');
-  //   fireEvent.click(loginButton);
-
-  //   // Fill in credentials
-  //   const usernameInput = screen.getByPlaceholderText('Username');
-  //   const passwordInput = screen.getByPlaceholderText('Password');
-
-  //   fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-  //   fireEvent.change(passwordInput, { target: { value: 'testpass' } });
-
-  //   // Submit login
-  //   const loginSubmitButton = screen.getAllByText('Login')[1]; // Second Login button is in modal
-  //   fireEvent.click(loginSubmitButton);
-
-  //   // Verify login modal closes and user is logged in
-  //   await waitFor(() => {
-  //     expect(screen.queryByPlaceholderText('Username')).not.toBeInTheDocument();
-  //     // expect(screen.getByText('Welcome, Yashwanth')).toBeInTheDocument();
-  //   });
-  // });
-
-  // Test 15: Does not login with empty credentials
+  
+  // Test 13: Does not login with empty credentials
   test('does not submit login with empty credentials', () => {
     render(<HomePage />);
 
@@ -273,7 +245,7 @@ describe('HomePage Component', () => {
     expect(screen.getByPlaceholderText('Username')).toBeInTheDocument();
   });
 
-  // Test 16: Shows all products when All category is selected
+  // Test 14: Shows all products when All category is selected
   test('shows all products when All category is selected', async () => {
     render(<HomePage />);
 
@@ -287,7 +259,7 @@ describe('HomePage Component', () => {
     expect(screen.getByText('Product 3')).toBeInTheDocument();
   });
 
-  // Test 17: Adds multiple quantities of same product
+  // Test 15: Adds multiple quantities of same product
   test('increases quantity when same product is added multiple times', async () => {
     render(<HomePage />);
 
@@ -310,7 +282,7 @@ describe('HomePage Component', () => {
     fireEvent.click(cartButton);
   });
 
-  // Test 18: Handles API error gracefully
+  // Test 16: Handles API error gracefully
   test('handles product fetch error gracefully', async () => {
     // Suppress console.error for this test
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});

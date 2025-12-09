@@ -30,30 +30,30 @@ export const TUTORIAL_CONTENT_HEADINGS = [
   },
 
   {
-    id: 9,
+    id: 8,
     title: "Playwright End-to-End Testing",
     mapId: "playwright_testing",
   },
   {
-    id: 10,
+    id: 9,
     title: "Lighthouse Performance & Accessibility",
     mapId: "lighthouse_testing",
   },
   {
-    id: 11,
+    id: 10,
     title: "Server-Side & API Testing Best Practices",
     mapId: "server_side_testing",
   },
   {
-    id: 12,
+    id: 11,
     title: "Best Practices for Web Testing",
     mapId: "web_testing_best_practices",
   },
-  { id: 13, title: "History of Web Testing", mapId: "testing_history" },
-  { id: 14, title: "Analytical Component (Pros & Cons)", mapId: "analysis" },
-  { id: 15, title: "References", mapId: "references" },
-  { id: 16, title: "Additional Resources", mapId: "additional_resources" },
-  { id: 17, title: "Demo - ECommerce Website", mapId: "demo" },
+  { id: 12, title: "History of Web Testing", mapId: "testing_history" },
+  { id: 13, title: "Analytical Component (Pros & Cons)", mapId: "analysis" },
+  { id: 14, title: "References", mapId: "references" },
+  { id: 15, title: "Additional Resources", mapId: "additional_resources" },
+  { id: 16, title: "Demo - ECommerce Website", mapId: "demo" },
 ];
 
 export const CONTENT_MAPPING = {
@@ -62,7 +62,7 @@ export const CONTENT_MAPPING = {
     paragraphs: [
       "Web testing is the process of evaluating a website or web application to ensure it functions correctly, securely, and performs efficiently for users. This includes checking basic features, form validation, security vulnerabilities, performance under load, and overall stability across different environments. By thoroughly testing before going live, teams prevent issues such as broken links, faulty features, or security holes from affecting real users, thereby protecting user trust and the business's reputation.",
 
-      "Modern websites integrate multiple layers — frontend UI, backend APIs, authentication mechanisms, databases, and third-party services. The primary goal of web testing is to ensure these layers work together seamlessly. Effective testing validates functionality (correct feature behavior), security (protection from threats), and performance (fast loading and responsiveness), which are especially important for high-traffic applications such as travel or e-commerce systems.",
+      "Modern websites integrate multiple layers — frontend UI, backend APIs, authentication mechanisms, databases, and third-party services. The primary goal of web testing is to ensure these layers work together seamlessly. Effective testing validates functionality (correct feature behavior), security (protection from threats), and performance (fast loading and responsiveness), which are especially important for high-traffic applications such as travel applications or e-commerce systems.",
 
       "Comprehensive web testing spans several key aspects: Functionality ensures features behave as intended; Usability verifies that the site is intuitive and simple for users; Accessibility ensures the site is usable by people with disabilities and follows WCAG standards; Performance measures speed, responsiveness, and handling of peak traffic; Security ensures resistance to attacks such as XSS or SQL injection; and Compatibility checks whether the site works consistently across browsers, devices, and operating systems.",
 
@@ -350,23 +350,6 @@ lighthouse https://your-deployed-store-url.com --view
       },
 
       {
-        subtitle: "Accessibility Testing",
-        text: "Accessibility tests ensure that the e-commerce app can be used by people with disabilities. We check for proper headings, labels, alt text on product images, keyboard focus, and color contrast. Lighthouse and axe-core can automatically flag many common issues.",
-        example:
-          "Using jest-axe to assert that the rendered HomePage has no obvious accessibility violations.",
-        code: `// Jest + axe-core Accessibility Test Example
-import { render } from "@testing-library/react";
-import { axe } from "jest-axe";
-import HomePage from "./HomePage";
-
-test("HomePage has no basic accessibility violations", async () => {
-  const { container } = render(<HomePage />);
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});`,
-      },
-
-      {
         subtitle: "API Testing (Server-Side with Postman / Newman)",
         text: "API tests hit the backend endpoints directly to verify status codes, response bodies, and error handling. For the e-commerce APIs (such as login, products, and cart), we create Postman requests and assertions, then run them in CI using Newman. This validates the server independently of the React UI.",
         example:
@@ -379,10 +362,7 @@ pm.test("Status code is 200", function () {
 pm.test("Response contains token", function () {
   const data = pm.response.json();
   pm.expect(data.token).to.exist;
-});
-
-// Newman CLI example to run the collection:
-// newman run ecommerce-api-tests.postman_collection.json`,
+});`,
       },
     ],
 
@@ -461,14 +441,14 @@ pm.test("Response contains token", function () {
         subtitle: "Jest",
         text: "Jest is a powerful JavaScript testing framework used mainly for unit and integration testing in React applications. It provides a built-in test runner, mocking utilities, snapshot testing, and fast parallel execution. Jest helps verify small pieces of logic such as utility functions, validation rules, and component behavior without relying on external APIs.",
         example:
-          "Used to test isolated functions like formatPrice() or to verify that the homepage title renders correctly.",
+          "Used to test isolated functions like calculateTotal() or to verify that the homepage title renders correctly.",
       },
 
       {
         subtitle: "React Testing Library (RTL)",
         text: "React Testing Library is a lightweight testing tool that focuses on testing React components the way a real user interacts with the UI. Instead of testing internal implementation, RTL emphasizes user-centric queries (e.g., finding elements by text, role, or label). It is ideal for testing component-level integration, form validation, and UI behavior.",
         example:
-          "Used to test the Login form by checking that validation messages appear when fields are empty.",
+          "Used to test the Login form or confirmation popups by checking that validation messages appear when fields are empty.",
       },
 
       {
@@ -490,13 +470,6 @@ pm.test("Response contains token", function () {
         text: "Postman is a widely used API testing and debugging tool that allows developers to send HTTP requests, inspect responses, write automated tests, and organize endpoints into collections. Postman is ideal for validating backend APIs before integrating them into the frontend.",
         example:
           "Used to test FakeStoreAPI login and product endpoints, ensuring correct data and status codes.",
-      },
-
-      {
-        subtitle: "Selenium (Mention)",
-        text: "Selenium WebDriver is one of the earliest and most widely adopted browser automation tools. Although newer frameworks like Playwright are more developer-friendly, Selenium remains important in enterprise testing environments due to its long history and broad ecosystem.",
-        example:
-          "Traditionally used for cross-browser automation and regression testing in large QA teams.",
       },
     ],
 
@@ -543,7 +516,7 @@ pm.test("Response contains token", function () {
     title: "React App Setup Instructions",
 
     paragraphs: [
-      "React is a JavaScript library for building fast, interactive user interfaces. It allows developers to create reusable UI components and manage updates efficiently using a virtual DOM. Modern web applications heavily rely on React for building scalable front-end architectures.",
+      "React is a JavaScript library for building fast, interactive user interfaces. It allows developers to create reusable UI components and efficiently update the UI using a virtual DOM system. Instead of updating the real browser DOM directly (which is slow), React creates a lightweight copy called the virtual DOM. When state changes, React compares the new virtual DOM with the previous one through a process called 'reconciliation' and updates only the parts of the real DOM that actually changed. This makes React extremely fast and efficient for large, dynamic web applications.",
 
       "To set up React locally, you first need Node.js and npm. On macOS, install Node using the installer from nodejs.org or run `brew install node` with Homebrew. On Windows, download and install Node.js from the official website. Once installed, you can verify the setup using `node -v` and `npm -v`.",
 
@@ -551,7 +524,7 @@ pm.test("Response contains token", function () {
 
       "Start the development server with `npm start`. This launches the app at http://localhost:3000. Any saved changes will automatically refresh in the browser. This running app will be used later for E2E tests with Playwright.",
 
-      "React’s project structure includes key folders such as `src/` (components, pages, hooks, tests), `public/` (static files), and the `package.json` configuration file that lists dependencies and npm scripts. The `src` folder is where most development and testing takes place.",
+      "React’s project structure includes key folders such as `src/` (components, pages, hooks, tests), `public/` (static files), and the `package.json` file. The `package.json` file defines your project's dependencies, development tools such as Jest and React Testing Library, and npm scripts like `start`, `test`, and `build`. It ensures consistent package versions across environments and allows tools like Playwright, ESLint, and Babel to integrate with the project seamlessly. The `src` folder is where most development and testing takes place.",
     ],
 
     example: {
@@ -630,6 +603,44 @@ npm start`,
       "Jest offers core primitives like `describe()`, `test()`, and `expect()` along with matchers such as `toBe()`, `toEqual()`, and `toBeInTheDocument()`. These are used to verify that the UI renders correctly, API calls are mocked, and component logic behaves as expected. RTL provides helpers like `render()`, `screen`, `fireEvent`, and `waitFor()` to simulate user actions and wait for asynchronous UI updates.",
       "In the HomePage tests, `global.fetch` is mocked using Jest to return fake products and a fake login token. This allows the tests to run without calling real backend APIs, while still validating that the component correctly renders products, opens the login modal, and updates the cart UI based on state.",
       "By combining Jest and RTL, we achieve fast, repeatable, and realistic client-side tests that validate both the underlying logic and the actual user-facing UI of the e-commerce demo.",
+    ],
+
+    sections: [
+      {
+        subtitle: "Running Unit Tests",
+        text: "To run the Jest unit tests and generate the test results shown below, use the following commands in your terminal. Jest provides multiple options for running tests, including watch mode for development and coverage reports for tracking test completeness.",
+        example: `# Navigate to the project directory
+cd webtesting-app
+
+# Run all unit tests
+npm test
+
+# Run tests with coverage report
+npm test -- --coverage
+
+# Run tests in watch mode (auto-rerun on file changes)
+npm test -- --watch
+
+# Run a specific test file
+npm test HomePage.test.js`,
+      },
+      {
+        subtitle: "Unit Test Results",
+        text: "Below are the test results from our Jest unit tests for the HomePage and ProductCard components. These tests validate component rendering, user interactions, state management, and API mocking.",
+        images: [
+          {
+            src: require("../Images/HomePageTest.jpg"),
+            alt: "HomePage component test results",
+            caption:
+              "HomePage Test Results - All tests passing with proper mocking",
+          },
+          {
+            src: require("../Images/ProductCardTest.jpg"),
+            alt: "ProductCard component test results",
+            caption: "ProductCard Test Results - Component behavior validated",
+          },
+        ],
+      },
     ],
 
     example: {
@@ -794,7 +805,7 @@ test("renders and responds to user interaction", () => {
       },
     ],
 
-    type: "paragraphs",
+    type: "multiple",
     isQuizCompleted: false,
   },
 
@@ -821,12 +832,43 @@ test("renders and responds to user interaction", () => {
 
     paragraphs: [
       "Playwright is a modern end-to-end (E2E) testing framework created by Microsoft. It automates real browsers such as Chromium, Firefox, and WebKit, allowing testers to simulate real-world user interactions across multiple devices and screen sizes.",
-      "Unlike unit or integration tests, Playwright validates the entire application workflow — from UI rendering to API communication — exactly the way a real user experiences it. This makes Playwright ideal for testing login flows, navigation, form submissions, product browsing, and complete user journeys.",
+      "Unlike unit or integration tests, Playwright validates the entire application workflow from UI rendering to API communication exactly the way a real user experiences it. This makes Playwright ideal for testing login flows, navigation, form submissions, product browsing, and complete user journeys.",
       "Playwright supports features like auto-waiting (reducing flaky tests), parallel execution, screenshots, network interception, tracing, and video recordings. These capabilities make debugging easier and provide high confidence that the application works end-to-end.",
       "In this tutorial, Playwright is used to test the Demo E-Commerce Website by launching the browser, navigating to the application, verifying UI elements, and ensuring that product data loads correctly from the backend.",
     ],
 
+    sections: [
+      {
+        subtitle: "Running E2E Tests",
+        text: "To run the Playwright end-to-end tests and generate the test results shown below, use the following commands. Playwright offers different modes: headless mode for CI/CD pipelines, UI mode for interactive debugging, and headed mode to watch tests execute in real browsers.",
+        example: `# Navigate to the project directory
+cd webtesting-app
+
+# Run E2E tests in headless mode (default, fastest)
+npm run test:e2e
+
+# Run E2E tests with UI mode (recommended for debugging)
+npm run test:e2e:ui
+
+# Run specific test file
+npx playwright test e2e-tests/ecommerce.spec.js
+
+# Run tests and generate HTML report
+npx playwright test --reporter=html`,
+      },
+      {
+        subtitle: "E2E Test Results",
+        text: "Below are the Playwright end-to-end test results showing all user flows validated in Chrome browser. These tests ensure the entire application works correctly from the user's perspective.",
+        image: require("../Images/E2ETest.jpg"),
+        imageAlt: "Playwright E2E test results",
+        imageCaption:
+          "Playwright E2E Test Results - All user workflows passing",
+      },
+    ],
+
     example: {
+      description:
+        "Complete Playwright E2E test suite for the HomePage component, demonstrating browser automation, user interaction simulation, and comprehensive UI validation:",
       code: `const { test, expect } = require('@playwright/test');
 
 test.describe('HomePage E2E Tests', () => {
@@ -892,7 +934,7 @@ test.describe('HomePage E2E Tests', () => {
       },
     ],
 
-    type: "paragraphs",
+    type: "multiple",
     isQuizCompleted: false,
   },
 
@@ -902,11 +944,26 @@ test.describe('HomePage E2E Tests', () => {
     paragraphs: [
       "Lighthouse is an automated auditing tool built into Chrome DevTools that evaluates web applications across four major categories: Performance, Accessibility, Best Practices, and SEO. It generates detailed reports with scores (0–100) and identifies opportunities to improve the overall quality of a web app.",
       "For performance testing, Lighthouse measures key metrics such as Largest Contentful Paint (LCP), Speed Index, Total Blocking Time (TBT), and Time to Interactive (TTI). These metrics help assess how quickly users can load, view, and interact with your site. Slow performance directly impacts bounce rates and user satisfaction.",
-      "For accessibility testing, Lighthouse checks for missing labels, poor contrast ratios, incorrect ARIA attributes, missing alt text, unusable forms, non-keyboard-friendly navigation, and more. Ensuring accessibility is essential for users with disabilities and also improves overall usability for everyone.",
+      "For accessibility testing, Lighthouse checks for missing labels, missing alt text, unusable forms, non-keyboard-friendly navigation, and more. Ensuring accessibility is essential for users with disabilities and also improves overall usability for everyone.",
       "Lighthouse audits are especially useful during development because they reveal bottlenecks such as large JavaScript bundles, unoptimized images, unused CSS, slow API responses, and layout shifts. These insights help developers continuously improve the performance and inclusiveness of their applications.",
       "In this project, Lighthouse is used to audit the Demo E-Commerce Website, ensuring that the homepage loads efficiently and meets accessibility standards before final deployment.",
     ],
 
+    sections: [
+      {
+        subtitle: "Running Lighthouse Audits",
+        text: "Below are the test results from our Lighthouse audits for the Tutorial Website.",
+        images: [
+          {
+            src: require("../Images/LightHouseTest.jpg"),
+            alt: "Lighthouse test results",
+            caption:
+              "Tutorial Website Test Results ",
+          },
+  
+        ],
+      }
+    ],
     example: {
       code: `Run the Lighthouse audit from Chrome DevTools:
 1. Open the application in Chrome.
@@ -941,7 +998,7 @@ test.describe('HomePage E2E Tests', () => {
       },
     ],
 
-    type: "paragraphs",
+    type: "multiple",
     isQuizCompleted: false,
   },
 
@@ -953,11 +1010,45 @@ test.describe('HomePage E2E Tests', () => {
       "Postman is used to design and validate API requests interactively. In this project, the FakeStoreAPI backend is tested using a Postman collection that checks whether endpoints return the correct HTTP status (200 OK), respond within an acceptable time (e.g., under 2000ms), and return well-structured JSON objects containing required fields like id, title, price, image, and category.",
       "Newman, the CLI runner for Postman, allows these API tests to be automated outside the Postman UI. By running Newman with a collection and environment file, we can execute all tests in a single command, generate detailed HTML reports (using the htmlextra reporter), and fail the process if any assertion fails. This makes it easy to plug API tests into CI/CD pipelines.",
       "Good server-side testing practice includes covering both happy-path and negative scenarios: valid requests that should succeed, invalid IDs or missing parameters that should return 4xx errors, and authenticated endpoints that should reject requests without tokens. Tests should validate not only the shape of the data but also business rules, error messages, and edge cases.",
-      "Additional best practices: use separate environments (development/staging) instead of hitting production, use environment variables for base URLs and auth tokens, set reasonable performance thresholds in tests (e.g., response time below 2000ms), and generate test reports that summarize total requests, assertions, and failures. In this project, running Newman produces a summary of total requests, failed requests, total assertions, and failed assertions, and exits with a non-zero code if any test fails.",
+      "Additional best practices: use separate environments (development/staging) instead of hitting production, use environment variables for base URLs and auth tokens,and generate test reports that summarize total requests, assertions, and failures. In this project, running Newman produces a summary of total requests, failed requests, total assertions, and failed assertions, and exits with a non-zero code if any test fails.",
       "Together with client-side tests (Jest + RTL) and E2E tests (Playwright), server-side and API testing ensures the backend is robust, predictable, and ready to handle real traffic without relying solely on manual Postman checks.",
     ],
 
+    sections: [
+      {
+        subtitle: "Running API Tests",
+        text: "To run the Newman API tests and generate the test results shown below, use the following commands. Newman executes Postman collections from the command line, making it perfect for automated testing pipelines. The htmlextra reporter generates detailed, professional test reports.",
+        example: `# Navigate to the project directory
+cd webtesting-app
+
+# Run API tests with HTML report (recommended)
+npm run test:api
+
+# Run API tests with CLI output only
+npm run test:api:cli
+
+# View the generated HTML report (macOS)
+open api-tests/reports/api-test-report.html
+
+# View the generated HTML report (Windows)
+start api-tests/reports/api-test-report.html
+
+# Run all tests together (unit + API + E2E)
+npm run test:all`,
+      },
+      {
+        subtitle: "API Test Results",
+        text: "Below are the Newman API test results showing all backend endpoints validated. These tests ensure the FakeStoreAPI returns correct status codes, response times, and data structures.",
+        image: require("../Images/APITest.jpg"),
+        imageAlt: "Newman API test results",
+        imageCaption:
+          "Newman API Test Results - All endpoints passing with correct responses",
+      },
+    ],
+
     example: {
+      description:
+        "Postman test script demonstrating API validation for the GET All Products endpoint. This script validates HTTP status codes, response times, data structure, and required fields:",
       code: `// Postman test script for GET All Products (inside collection)
 pm.test("Status code is 200", function () {
     pm.response.to.have.status(200);
@@ -985,6 +1076,8 @@ pm.test("Products have required fields", function () {
     },
 
     code: {
+      description:
+        "Newman runner script that automates Postman collection execution from Node.js. This script configures Newman to run API tests, generate HTML reports, and provide detailed test summaries:",
       snippet: `// newman-runner.js — Automated API test runner using Newman
 const newman = require('newman');
 const path = require('path');
@@ -1026,7 +1119,6 @@ newman.run(options, function (err, summary) {
   const { stats } = summary.run;
 
   console.log('\\nTest Results Summary:');
-  console.log('========================');
   console.log(\`Total Requests: \${stats.requests.total}\`);
   console.log(\`Failed Requests: \${stats.requests.failed}\`);
   console.log(\`Total Assertions: \${stats.assertions.total}\`);
@@ -1086,7 +1178,7 @@ newman.run(options, function (err, summary) {
       },
     ],
 
-    type: "paragraphs",
+    type: "multiple",
     isQuizCompleted: false,
   },
 
@@ -1096,51 +1188,57 @@ newman.run(options, function (err, summary) {
     sections: [
       {
         subtitle: "1. Follow the Testing Pyramid",
-        text: "Structure your test suite with many fast unit tests at the base, fewer integration tests in the middle, and a small number of E2E tests at the top. This approach maximizes coverage while minimizing execution time and maintenance overhead. Unit tests catch logic errors early, integration tests verify component interactions, and E2E tests validate critical user journeys."
+        text: "Structure your test suite with many fast unit tests at the base, fewer integration tests in the middle, and a small number of E2E tests at the top. This approach maximizes coverage while minimizing execution time and maintenance overhead. Unit tests catch logic errors early, integration tests verify component interactions, and E2E tests validate critical user journeys.",
       },
       {
-        subtitle: "2. Write Tests Early (Shift Left)",
-        text: "Start writing tests as early as possible in the development cycle. Writing tests alongside feature development helps catch bugs before they reach production and ensures that code is designed with testability in mind. This 'shift left' approach reduces the cost of fixing defects."
+        subtitle: "2. Write Tests Early",
+        text: "Start writing tests as early as possible in the development cycle. Writing tests alongside feature development helps catch bugs before they reach production and ensures that code is designed with testability in mind. This 'shift left' approach reduces the cost of fixing defects.",
       },
       {
         subtitle: "3. Keep Tests Independent and Isolated",
-        text: "Each test should be able to run independently without relying on the state from other tests. Use setup and teardown hooks (beforeEach, afterEach) to reset state. Avoid shared mutable state between tests to prevent flaky failures and make debugging easier."
+        text: "Each test should be able to run independently without relying on the state from other tests. Use setup and teardown hooks (beforeEach, afterEach) to reset state. Avoid shared mutable state between tests to prevent failures and make debugging easier.",
       },
       {
         subtitle: "4. Use Meaningful Test Names",
-        text: "Test names should clearly describe what is being tested and what the expected outcome is. Good naming conventions like 'should display error message when login fails' make it easy to understand test failures without reading the implementation."
+        text: "Test names should clearly describe what is being tested and what the expected outcome is. Good naming conventions like 'should display error message when login fails' make it easy to understand test failures without reading the implementation.",
       },
       {
         subtitle: "5. Mock External Dependencies",
-        text: "In unit and integration tests, mock external APIs, databases, and third-party services. This ensures tests are fast, reliable, and not dependent on external availability. Use tools like Jest's jest.fn() for mocking functions and MSW (Mock Service Worker) for API mocking."
+        text: "In unit and integration tests, mock external APIs, databases, and third-party services. This ensures tests are fast, reliable, and not dependent on external availability. Use tools like Jest's jest.fn() for mocking functions.",
       },
       {
         subtitle: "6. Avoid Testing Implementation Details",
-        text: "Focus on testing behavior and user-visible outcomes rather than internal implementation. Tests that rely on implementation details break when code is refactored, even if functionality remains correct. React Testing Library encourages this by querying elements the way users would (by text, role, label)."
+        text: "Focus on testing behavior and user-visible outcomes rather than internal implementation. Tests that rely on implementation details break when code is refactored, even if functionality remains correct. React Testing Library encourages this by querying elements the way users would (by text, role, label).",
       },
       {
         subtitle: "7. Handle Asynchronous Operations Properly",
-        text: "Use proper async utilities like waitFor, findBy queries, and Playwright's auto-waiting. Avoid arbitrary delays (sleep/setTimeout) which make tests slow and flaky. Let the testing framework wait for the expected state naturally."
+        text: "Use proper async utilities like waitFor, findBy queries. Avoid arbitrary delays (sleep/setTimeout) which make tests slow. Let the testing framework wait for the expected state naturally.",
       },
       {
         subtitle: "8. Run Tests in CI/CD Pipelines",
-        text: "Integrate tests into your continuous integration pipeline so they run automatically on every commit or pull request. This provides immediate feedback and prevents broken code from being merged. Use parallel execution and test splitting to keep CI runs fast."
+        text: "Integrate tests into your continuous integration pipeline so they run automatically on every commit or pull request. This provides immediate feedback and prevents broken code from being merged. Use parallel execution and test splitting to keep CI runs fast.",
       },
       {
         subtitle: "9. Maintain Test Coverage Metrics",
-        text: "Track code coverage to identify untested areas, but don't chase 100% coverage blindly. Focus on meaningful coverage of critical paths, edge cases, and error handling. Use coverage reports as a guide, not a goal."
+        text: "Track code coverage to identify untested areas, but don't chase 100% coverage blindly. Focus on meaningful coverage of critical paths, edge cases, and error handling. Use coverage reports as a guide, not a goal.",
       },
       {
         subtitle: "10. Review and Refactor Tests Regularly",
-        text: "Treat test code with the same care as production code. Refactor tests to remove duplication, improve readability, and update them when requirements change. Delete obsolete tests that no longer provide value."
-      }
+        text: "Treat test code with the same care as production code. Refactor tests to remove duplication, improve readability, and update them when requirements change. Delete obsolete tests that no longer provide value.",
+      },
     ],
 
     quiz: [
       {
-        question: "According to the testing pyramid, which type of test should you have the most of?",
-        options: ["E2E tests", "Integration tests", "Unit tests", "Manual tests"],
-        answer: 2
+        question:
+          "According to the testing pyramid, which type of test should you have the most of?",
+        options: [
+          "E2E tests",
+          "Integration tests",
+          "Unit tests",
+          "Manual tests",
+        ],
+        answer: 2,
       },
       {
         question: "What does 'shift left' mean in testing?",
@@ -1148,9 +1246,9 @@ newman.run(options, function (err, summary) {
           "Moving tests to a different file",
           "Writing tests earlier in the development cycle",
           "Running tests on the left monitor",
-          "Testing only left-aligned UI elements"
+          "Testing only left-aligned UI elements",
         ],
-        answer: 1
+        answer: 1,
       },
       {
         question: "Why should tests avoid testing implementation details?",
@@ -1158,198 +1256,203 @@ newman.run(options, function (err, summary) {
           "It makes tests run faster",
           "It reduces code coverage",
           "Tests won't break during refactoring if behavior stays the same",
-          "It's required by Jest"
+          "It's required by Jest",
         ],
-        answer: 2
+        answer: 2,
       },
       {
-        question: "What is the recommended way to handle async operations in tests?",
+        question:
+          "What is the recommended way to handle async operations in tests?",
         options: [
           "Use setTimeout with long delays",
           "Use sleep() functions",
           "Use waitFor, findBy, or auto-waiting utilities",
-          "Ignore async operations"
+          "Ignore async operations",
         ],
-        answer: 2
-      }
+        answer: 2,
+      },
     ],
 
     type: "sections",
     isQuizCompleted: false,
   },
 
-testing_history: {
-  title: "History of Web Testing",
+  testing_history: {
+    title: "History of Web Testing",
 
-  paragraphs: [
-    "Web testing has evolved significantly since the early days of the internet. In the late 1990s and early 2000s, most testing was entirely manual, involving teams of testers clicking through web pages and documenting issues. This approach was slow, error-prone, and difficult to scale as websites became more dynamic.",
-    
-    "The mid-2000s saw a major breakthrough with the introduction of Selenium, one of the first widely adopted browser automation frameworks. Selenium enabled automated UI interactions, reducing repetitive manual testing. Over time, Selenium grew into a full suite (IDE, RC, WebDriver) and became the industry standard for functional web testing.",
-    
-    "In 2013, the W3C WebDriver standard formalized how browsers expose automation APIs. This allowed browser vendors to build native support, improving reliability and ensuring consistent automation behavior across Chrome, Firefox, Safari, and Edge.",
-    
-    "As modern web apps became more complex, developers needed faster, more stable testing tools. This led to frameworks like Cypress (2017), which introduced time-travel debugging and a developer-friendly API, and Playwright (2020), which supports cross-browser automation, auto-waiting, network mocking, tracing, and parallel execution. These tools improved speed and reduced flakiness compared to older Selenium-based approaches.",
-    
-    "Today, web testing spans multiple layers: unit testing (Jest), component testing (RTL), end-to-end testing (Playwright, Cypress), performance and accessibility auditing (Lighthouse), and API validation (Postman, Newman). The evolution reflects a shift from purely manual UI checking to comprehensive, automated, multi-layer testing strategies that support modern CI/CD pipelines.",
-    
-    "The future of web testing includes AI-assisted debugging, self-healing test scripts, and autonomous test generation—already emerging in platforms that analyze UI structure, learn from user flows, and dynamically adapt locators when interfaces change."
-  ],
+    paragraphs: [
+      "Web testing has evolved significantly since the early days of the internet. In the late 1990s and early 2000s, most testing was entirely manual, involving teams of testers clicking through web pages and documenting issues. This approach was slow, error-prone, and difficult to scale as websites became more dynamic.",
 
-  links: [
-    { label: "Official Selenium Website", url: "https://www.selenium.dev" },
-    { label: "W3C WebDriver Specification", url: "https://www.w3.org/TR/webdriver/" },
-    { label: "Playwright Documentation", url: "https://playwright.dev" },
-    { label: "Cypress Documentation", url: "https://www.cypress.io" }
-  ],
+      "The mid-2000s saw a major breakthrough with the introduction of Selenium, one of the first widely adopted browser automation frameworks. Selenium enabled automated UI interactions, reducing repetitive manual testing. Over time, Selenium grew into a full suite (IDE, RC, WebDriver) and became the industry standard for functional web testing.",
 
-  quiz: [
-    {
-      question: "Which tool revolutionized automated browser testing in the mid-2000s?",
-      options: ["Jest", "Selenium", "Cypress", "Lighthouse"],
-      answer: 1
-    },
-    {
-      question: "What did the W3C WebDriver specification provide?",
-      options: [
-        "A standard for API testing",
-        "A unified standard for browser automation APIs",
-        "A UI component framework",
-        "A replacement for manual testing"
-      ],
-      answer: 1
-    },
-    {
-      question: "Which modern testing framework introduced auto-waiting and cross-browser automation?",
-      options: ["Cypress", "Playwright", "Postman", "Jest"],
-      answer: 1
-    },
-    {
-      question: "Why did modern tools like Cypress and Playwright emerge?",
-      options: [
-        "To replace HTML and CSS",
-        "To improve reliability and speed over older Selenium workflows",
-        "To remove the need for any testing",
-        "To test only APIs without UI support"
-      ],
-      answer: 1
-    }
-  ],
+      "In 2013, the W3C WebDriver standard formalized how browsers expose automation APIs. This allowed browser vendors to build native support, improving reliability and ensuring consistent automation behavior across Chrome, Firefox, Safari, and Edge.",
 
-  type: "paragraphs",
-  isQuizCompleted: false
-},
+      "As modern web apps became more complex, developers needed faster, more stable testing tools. This led to frameworks like Playwright (2020), which supports cross-browser automation, auto-waiting, network mocking, tracing, and parallel execution. These tools improved speed and reduced flakiness compared to older Selenium-based approaches.",
 
+      "Today, web testing spans multiple layers: unit testing (Jest), component testing (RTL), end-to-end testing (Playwright), performance and accessibility auditing (Lighthouse), and API validation (Postman, Newman). The evolution reflects a shift from purely manual UI checking to comprehensive, automated, multi-layer testing strategies that support modern CI/CD pipelines.",
 
-analysis: {
-  title: "Analytical Component (Pros & Cons)",
+      "The future of web testing includes AI-assisted debugging, self-healing test scripts, and autonomous test generation already emerging in platforms that analyze UI structure, learn from user flows, and dynamically adapt locators when interfaces change.",
+    ],
 
-  sections: [
-    {
-      subtitle: "Strengths of Modern Web Testing",
-      text:
-        "Modern web testing provides a structured and automated approach to validating application quality across UI, API, and performance layers. Automated tests reduce human error, improve reliability, and support rapid iteration. Unit and integration tests give developers instant feedback, while E2E tests validate full user workflows. Accessibility and performance audits ensure compliance with standards and improve user experience. When integrated into CI/CD, automated testing guards against regressions and helps teams ship high-quality features faster."
-    },
+    links: [
+      { label: "Official Selenium Website", url: "https://www.selenium.dev" },
+      {
+        label: "W3C WebDriver Specification",
+        url: "https://www.w3.org/TR/webdriver/",
+      },
+      { label: "Playwright Documentation", url: "https://playwright.dev" },
+      { label: "Cypress Documentation", url: "https://www.cypress.io" },
+    ],
 
-    {
-      subtitle: "Weaknesses & Challenges",
-      text:
-        "Automated testing introduces overhead in terms of setup, tooling, and long-term maintenance. Test flakiness—especially in E2E tests—can slow teams down and create false confidence. As applications evolve, tests must be frequently updated, increasing development cost. Complex tools require learning curves, from writing mocks in Jest to stabilizing selectors in Playwright. Additionally, not all usability issues or visual regressions can be caught via automation, so a mix of automated and manual testing is still required for complete coverage."
-    },
+    quiz: [
+      {
+        question:
+          "Which tool revolutionized automated browser testing in the mid-2000s?",
+        options: ["Jest", "Selenium", "Cypress", "Lighthouse"],
+        answer: 1,
+      },
+      {
+        question: "What did the W3C WebDriver specification provide?",
+        options: [
+          "A standard for API testing",
+          "A unified standard for browser automation APIs",
+          "A UI component framework",
+          "A replacement for manual testing",
+        ],
+        answer: 1,
+      },
+      {
+        question:
+          "Which modern testing framework introduced auto-waiting and cross-browser automation?",
+        options: ["Cypress", "Playwright", "Postman", "Jest"],
+        answer: 1,
+      },
+      {
+        question: "Why did modern tools like Cypress and Playwright emerge?",
+        options: [
+          "To replace HTML and CSS",
+          "To improve reliability and speed over older Selenium workflows",
+          "To remove the need for any testing",
+          "To test only APIs without UI support",
+        ],
+        answer: 1,
+      },
+    ],
 
-    {
-      subtitle: "Future Directions in Web Testing",
-      text:
-        "The future of testing is increasingly AI-driven. Emerging tools generate tests automatically based on user behavior, adapt tests when UI changes occur, and detect flaky tests with machine learning. Cloud-based testing platforms are expanding test matrices to include multiple devices, browsers, and network conditions. Real-user monitoring (RUM) is becoming integral to production quality, enabling teams to validate performance and reliability based on real traffic patterns. As web apps become more dynamic, AI-powered test orchestration and self-healing automation will play a critical role in reducing maintenance costs."
-    }
-  ],
+    type: "paragraphs",
+    isQuizCompleted: false,
+  },
 
-  links: [
-    {
-      label: "Google - Web Testing & Automation Best Practices",
-      url: "https://web.dev/learn/testing/"
-    },
-    {
-      label: "W3C WebDriver Standard (Browser Automation)",
-      url: "https://www.w3.org/TR/webdriver/"
-    },
-    {
-      label: "Microsoft Playwright Official Documentation",
-      url: "https://playwright.dev/docs/intro"
-    },
-    {
-      label: "Cypress Testing Best Practices",
-      url: "https://docs.cypress.io/guides/references/best-practices"
-    },
-    {
-      label: "Google Lighthouse Performance & Accessibility Docs",
-      url: "https://developer.chrome.com/docs/lighthouse/overview/"
-    },
-    {
-      label: "Postman API Testing Concepts",
-      url: "https://learning.postman.com/docs/writing-scripts/test-scripts/"
-    },
-    {
-      label: "Martin Fowler – The Testing Pyramid",
-      url: "https://martinfowler.com/articles/practical-test-pyramid.html"
-    }
-  ],
+  analysis: {
+    title: "Analytical Component (Pros & Cons)",
 
-  quiz: [
-    {
-      question: "Which is a major benefit of automated testing in modern development?",
-      options: [
-        "It guarantees zero bugs in production",
-        "It improves reliability and enables continuous delivery workflows",
-        "It removes the need for developers to understand code",
-        "It eliminates all manual testing tasks"
-      ],
-      answer: 1
-    },
-    {
-      question: "Why do E2E tests often become flaky?",
-      options: [
-        "They run without browsers",
-        "They depend on UI timing, API responses, and dynamic elements",
-        "They always execute instantly",
-        "They never interact with APIs"
-      ],
-      answer: 1
-    },
-    {
-      question: "What is a major challenge of maintaining large automated test suites?",
-      options: [
-        "They require no documentation",
-        "They become slower and require continuous updates",
-        "They remove the need for integration tests",
-        "They automatically detect performance issues"
-      ],
-      answer: 1
-    },
-    {
-      question: "Which future trend aims to reduce test failures caused by UI changes?",
-      options: [
-        "Hardcoding all CSS selectors",
-        "Ignoring failed tests",
-        "Self-healing automated tests using AI",
-        "Running fewer E2E tests"
-      ],
-      answer: 2
-    },
-    {
-      question: "Real-user monitoring (RUM) helps teams by:",
-      options: [
-        "Simulating fictional test scenarios",
-        "Collecting performance and error data from actual users in production",
-        "Replacing all unit tests",
-        "Ensuring tests always pass"
-      ],
-      answer: 1
-    }
-  ],
+    sections: [
+      {
+        subtitle: "Strengths of Modern Web Testing",
+        text: "Modern web testing provides a structured and automated approach to validating application quality across UI, API, and performance layers. Automated tests reduce human error, improve reliability, and support rapid iteration. Unit and integration tests give developers instant feedback, while E2E tests validate full user workflows. Accessibility and performance audits ensure compliance with standards and improve user experience. When integrated into CI/CD, automated testing guards against regressions and helps teams ship high-quality features faster.",
+      },
 
-  type: "sections",
-  isQuizCompleted: false
-},
+      {
+        subtitle: "Weaknesses & Challenges",
+        text: "Automated testing introduces overhead in terms of setup, tooling, and long-term maintenance. Test flakiness—especially in E2E tests—can slow teams down and create false confidence. As applications evolve, tests must be frequently updated, increasing development cost. Complex tools require learning curves, from writing mocks in Jest to stabilizing selectors in Playwright. Additionally, not all usability issues or visual regressions can be caught via automation, so a mix of automated and manual testing is still required for complete coverage.",
+      },
+
+      {
+        subtitle: "Future Directions in Web Testing",
+        text: "The future of testing is increasingly AI-driven. Emerging tools generate tests automatically based on user behavior, adapt tests when UI changes occur, and detect flaky tests with machine learning. Cloud-based testing platforms are expanding test matrices to include multiple devices, browsers, and network conditions. Real-time monitoring is becoming integral to production quality, enabling teams to validate performance and reliability based on real traffic patterns. As web apps become more dynamic, AI-powered test orchestration and self-healing automation will play a critical role in reducing maintenance costs.",
+      },
+    ],
+
+    links: [
+      {
+        label: "Google - Web Testing & Automation Best Practices",
+        url: "https://web.dev/learn/testing/",
+      },
+      {
+        label: "W3C WebDriver Standard (Browser Automation)",
+        url: "https://www.w3.org/TR/webdriver/",
+      },
+      {
+        label: "Microsoft Playwright Official Documentation",
+        url: "https://playwright.dev/docs/intro",
+      },
+      {
+        label: "Cypress Testing Best Practices",
+        url: "https://docs.cypress.io/guides/references/best-practices",
+      },
+      {
+        label: "Google Lighthouse Performance & Accessibility Docs",
+        url: "https://developer.chrome.com/docs/lighthouse/overview/",
+      },
+      {
+        label: "Postman API Testing Concepts",
+        url: "https://learning.postman.com/docs/writing-scripts/test-scripts/",
+      },
+      {
+        label: "Martin Fowler – The Testing Pyramid",
+        url: "https://martinfowler.com/articles/practical-test-pyramid.html",
+      },
+    ],
+
+    quiz: [
+      {
+        question:
+          "Which is a major benefit of automated testing in modern development?",
+        options: [
+          "It guarantees zero bugs in production",
+          "It improves reliability and enables continuous delivery workflows",
+          "It removes the need for developers to understand code",
+          "It eliminates all manual testing tasks",
+        ],
+        answer: 1,
+      },
+      {
+        question: "Why do E2E tests often become flaky?",
+        options: [
+          "They run without browsers",
+          "They depend on UI timing, API responses, and dynamic elements",
+          "They always execute instantly",
+          "They never interact with APIs",
+        ],
+        answer: 1,
+      },
+      {
+        question:
+          "What is a major challenge of maintaining large automated test suites?",
+        options: [
+          "They require no documentation",
+          "They become slower and require continuous updates",
+          "They remove the need for integration tests",
+          "They automatically detect performance issues",
+        ],
+        answer: 1,
+      },
+      {
+        question:
+          "Which future trend aims to reduce test failures caused by UI changes?",
+        options: [
+          "Hardcoding all CSS selectors",
+          "Ignoring failed tests",
+          "Self-healing automated tests using AI",
+          "Running fewer E2E tests",
+        ],
+        answer: 2,
+      },
+      {
+        question: "Real-user monitoring (RUM) helps teams by:",
+        options: [
+          "Simulating fictional test scenarios",
+          "Collecting performance and error data from actual users in production",
+          "Replacing all unit tests",
+          "Ensuring tests always pass",
+        ],
+        answer: 1,
+      },
+    ],
+
+    type: "sections",
+    isQuizCompleted: false,
+  },
 
   references: {
     title: "References",
@@ -1357,16 +1460,46 @@ analysis: {
       "The following references were used throughout the development of this tutorial and are cited where applicable in the content above.",
     ],
     links: [
-      { label: "Jest Official Documentation - Getting Started", url: "https://jestjs.io/docs/getting-started" },
-      { label: "React Testing Library - Introduction", url: "https://testing-library.com/docs/react-testing-library/intro/" },
-      { label: "Playwright Official Documentation", url: "https://playwright.dev/docs/intro" },
-      { label: "Google Chrome Lighthouse Overview", url: "https://developer.chrome.com/docs/lighthouse/overview/" },
-      { label: "Postman Learning Center - Writing Test Scripts", url: "https://learning.postman.com/docs/writing-scripts/test-scripts/" },
-      { label: "W3C Web Content Accessibility Guidelines (WCAG) 2.1", url: "https://www.w3.org/WAI/WCAG21/quickref/" },
-      { label: "W3C WebDriver Specification", url: "https://www.w3.org/TR/webdriver/" },
-      { label: "Martin Fowler - The Practical Test Pyramid", url: "https://martinfowler.com/articles/practical-test-pyramid.html" },
-      { label: "FakeStoreAPI Documentation", url: "https://fakestoreapi.com/docs" },
-      { label: "Create React App Official Guide", url: "https://create-react-app.dev/docs/getting-started/" },
+      {
+        label: "Jest Official Documentation - Getting Started",
+        url: "https://jestjs.io/docs/getting-started",
+      },
+      {
+        label: "React Testing Library - Introduction",
+        url: "https://testing-library.com/docs/react-testing-library/intro/",
+      },
+      {
+        label: "Playwright Official Documentation",
+        url: "https://playwright.dev/docs/intro",
+      },
+      {
+        label: "Google Chrome Lighthouse Overview",
+        url: "https://developer.chrome.com/docs/lighthouse/overview/",
+      },
+      {
+        label: "Postman Learning Center - Writing Test Scripts",
+        url: "https://learning.postman.com/docs/writing-scripts/test-scripts/",
+      },
+      {
+        label: "W3C Web Content Accessibility Guidelines (WCAG) 2.1",
+        url: "https://www.w3.org/WAI/WCAG21/quickref/",
+      },
+      {
+        label: "W3C WebDriver Specification",
+        url: "https://www.w3.org/TR/webdriver/",
+      },
+      {
+        label: "Martin Fowler - The Practical Test Pyramid",
+        url: "https://martinfowler.com/articles/practical-test-pyramid.html",
+      },
+      {
+        label: "FakeStoreAPI Documentation",
+        url: "https://fakestoreapi.com/docs",
+      },
+      {
+        label: "Create React App Official Guide",
+        url: "https://create-react-app.dev/docs/getting-started/",
+      },
     ],
     quiz: [],
     type: "multiple",
@@ -1378,16 +1511,46 @@ analysis: {
       "The following resources are recommended for further learning and deeper exploration of web testing concepts and tools.",
     ],
     links: [
-      { label: "MDN Web Docs - Web Development Guide", url: "https://developer.mozilla.org/en-US/docs/Web" },
-      { label: "Google Web.dev - Learn Web Performance", url: "https://web.dev/learn/performance/" },
-      { label: "Playwright YouTube Channel - Official Tutorials", url: "https://www.youtube.com/c/Abortnick" },
-      { label: "Jest Examples Repository", url: "https://github.com/facebook/jest/tree/main/examples" },
-      { label: "Postman Public API Network", url: "https://www.postman.com/explore" },
-      { label: "Testing JavaScript by Kent C. Dodds", url: "https://testingjavascript.com/" },
-      { label: "Cypress Real World App (Testing Example)", url: "https://github.com/cypress-io/cypress-realworld-app" },
-      { label: "Google Web Fundamentals - Testing", url: "https://developers.google.com/web/fundamentals" },
-      { label: "Accessibility Developer Guide", url: "https://www.accessibility-developer-guide.com/" },
-      { label: "React Documentation - Testing Overview", url: "https://react.dev/learn/testing" },
+      {
+        label: "MDN Web Docs - Web Development Guide",
+        url: "https://developer.mozilla.org/en-US/docs/Web",
+      },
+      {
+        label: "Google Web.dev - Learn Web Performance",
+        url: "https://web.dev/learn/performance/",
+      },
+      {
+        label: "Playwright YouTube Channel - Official Tutorials",
+        url: "https://www.youtube.com/c/Abortnick",
+      },
+      {
+        label: "Jest Examples Repository",
+        url: "https://github.com/facebook/jest/tree/main/examples",
+      },
+      {
+        label: "Postman Public API Network",
+        url: "https://www.postman.com/explore",
+      },
+      {
+        label: "Testing JavaScript by Kent C. Dodds",
+        url: "https://testingjavascript.com/",
+      },
+      {
+        label: "Cypress Real World App (Testing Example)",
+        url: "https://github.com/cypress-io/cypress-realworld-app",
+      },
+      {
+        label: "Google Web Fundamentals - Testing",
+        url: "https://developers.google.com/web/fundamentals",
+      },
+      {
+        label: "Accessibility Developer Guide",
+        url: "https://www.accessibility-developer-guide.com/",
+      },
+      {
+        label: "React Documentation - Testing Overview",
+        url: "https://react.dev/learn/testing",
+      },
     ],
     quiz: [],
     type: "multiple",

@@ -84,7 +84,7 @@ describe('ProductCard Component', () => {
     expect(prices.length).toBeGreaterThanOrEqual(1);
   });
 
-  // Test 8: Does not crash when onAddToCart is not provided
+  // Test 7: Does not crash when onAddToCart is not provided
   test('does not crash when onAddToCart prop is not provided', () => {
     render(<ProductCard {...mockProduct} />);
 
@@ -94,7 +94,7 @@ describe('ProductCard Component', () => {
     expect(() => fireEvent.click(addToCartButton)).not.toThrow();
   });
 
-  // Test 9: Product card has correct CSS class
+  // Test 8: Product card has correct CSS class
   test('has productCard class', () => {
     const { container } = render(<ProductCard {...mockProduct} />);
 
@@ -102,7 +102,7 @@ describe('ProductCard Component', () => {
     expect(productCard).toHaveClass('productCard');
   });
 
-  // Test 10: Quantity defaults to 1
+  // Test 9: Quantity defaults to 1
   test('quantity input defaults to 1 in modal', () => {
     render(<ProductCard {...mockProduct} />);
 
@@ -112,7 +112,7 @@ describe('ProductCard Component', () => {
     expect(quantityInput).toHaveValue('1');
   });
 
-  // Test 11: Changes quantity in modal
+  // Test 10: Changes quantity in modal
   test('allows changing quantity in modal', () => {
     render(<ProductCard {...mockProduct} />);
 
@@ -126,7 +126,7 @@ describe('ProductCard Component', () => {
     expect(quantityInput).toHaveValue('5');
   });
 
-  // Test 12: Adds product with custom quantity from modal
+  // Test 11: Adds product with custom quantity from modal
   test('adds product with custom quantity when added from modal', () => {
     const mockOnAddToCart = jest.fn();
     render(<ProductCard {...mockProduct} onAddToCart={mockOnAddToCart} />);
@@ -156,7 +156,7 @@ describe('ProductCard Component', () => {
     );
   });
 
-  // Test 14: Resets quantity when modal is cancelled
+  // Test 12: Resets quantity when modal is cancelled
   test('resets quantity to 1 when modal is cancelled', () => {
     render(<ProductCard {...mockProduct} />);
 
@@ -178,14 +178,14 @@ describe('ProductCard Component', () => {
     expect(newQuantityInput).toHaveValue('1');
   });
 
-  // Test 15: Displays rating count
+  // Test 13: Displays rating count
   test('displays rating information correctly', () => {
     render(<ProductCard {...mockProduct} />);
 
     expect(screen.getByText('Rating: 4.5')).toBeInTheDocument();
   });
 
-  // Test 16: Image is displayed correctly
+  // Test 14: Image is displayed correctly
   test('image is displayed correctly', () => {
     render(<ProductCard {...mockProduct} />);
 
@@ -195,7 +195,7 @@ describe('ProductCard Component', () => {
     expect(image).toHaveAttribute('src', 'https://example.com/image.jpg');
   });
 
-  // Test 17: Product details section exists
+  // Test 15: Product details section exists
   test('has productDetails section with correct structure', () => {
     render(<ProductCard {...mockProduct} />);
 
@@ -214,7 +214,7 @@ describe('ProductCard Component', () => {
     expect(rating).toHaveClass('rating');
   });
 
-  // Test 18: Action buttons are displayed
+  // Test 16: Action buttons are displayed
   test('displays both action buttons', () => {
     render(<ProductCard {...mockProduct} />);
 
@@ -226,7 +226,7 @@ describe('ProductCard Component', () => {
     expect(viewButton).toBeInTheDocument();
   });
 
-  // Test 19: Modal has correct title
+  // Test 17: Modal has correct title
   test('modal displays product title as header', () => {
     render(<ProductCard {...mockProduct} />);
 
@@ -236,7 +236,7 @@ describe('ProductCard Component', () => {
     expect(screen.getAllByText('Test Product').length).toBeGreaterThan(1);
   });
 
-  // Test 20: Modal shows product image
+  // Test 18: Modal shows product image
   test('modal displays product image', () => {
     render(<ProductCard {...mockProduct} />);
 
