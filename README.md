@@ -4,9 +4,9 @@ An interactive, comprehensive web testing tutorial platform built with React, de
 
 ## Course Information
 
-**Course**: SER598 - Web Testing  
+**Course**: SER598 - Web Based Application  
 **Institution**: Arizona State University  
-**Project Type**: Educational Tutorial Platform
+**Project Type**: Educational Tutorial Platform on Web Application Testing
 
 ## Team Members
 
