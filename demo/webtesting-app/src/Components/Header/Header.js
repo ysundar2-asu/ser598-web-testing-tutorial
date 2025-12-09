@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import "./Header.scss";
 import CustomButton from "../CustomButton/CustomButton";
 import { Drawer, Progress } from "antd";
-import { TEAM_MEMEBERS_LIST } from "../../constant";
+import { TEAM_MEMEBERS_LIST } from "../../Tutorial/constant";
 
 function Header(props) {
   const { completedTopics = [], totalTopics = 0 } = props;

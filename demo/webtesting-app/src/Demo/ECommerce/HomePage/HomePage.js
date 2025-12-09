@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./HomePage.scss";
-import { Button, Drawer, Dropdown, Modal, Select } from "antd";
-import { AUTH_USER_API, GET_PRODUCTS_API, PRODUCT_CATEGORIES } from "../../../constant";
+import { Button, Drawer, Dropdown, Modal, Select, Spin } from "antd";
+import { AUTH_USER_API, GET_PRODUCTS_API, PRODUCT_CATEGORIES } from "../../Constant";
 import ProductCard from "../ProductCard/ProductCard";
 
 export default function HomePage() {
+  const [showLoader, setShowLoader] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [productList, setProductList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(PRODUCT_CATEGORIES[0].value);
@@ -21,6 +22,7 @@ export default function HomePage() {
       .then((data) => {
         setProductList(data);
         setFilteredProductList(data);
+        setShowLoader(false);
       });
     
   }, []);
@@ -100,6 +102,9 @@ export default function HomePage() {
             
         </div>
         <div className="productList">
+          {showLoader && <div className="loader">
+            <Spin size="large" />
+          </div>}
           {filteredProductList.map((product) => <ProductCard key={product.id} {...product} onAddToCart={handleAddToCart} />)}
         </div>
     </div>

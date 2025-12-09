@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import "./Content.scss";
 import { Button, Modal, Radio } from "antd";
-import HomePage from "../ECommerce/HomePage/HomePage";
+import HomePage from "../../Demo/ECommerce/HomePage/HomePage";
 
 export default function Content(props) {
   const { content, currentActiveTab, tabs, onChangeTab, onTopicComplete } = props;

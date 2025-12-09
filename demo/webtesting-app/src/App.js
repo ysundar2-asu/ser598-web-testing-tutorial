@@ -2,8 +2,8 @@ import { useCallback, useState } from 'react';
 import './App.scss';
 import Header from './Components/Header/Header';
 import SideBar from './Components/SideBar/SideBar';
-import { CONTENT_MAPPING, TUTORIAL_CONTENT_HEADINGS } from './constant';
-import Content from './Components/Content/Content';
+import { CONTENT_MAPPING, TUTORIAL_CONTENT_HEADINGS } from './Tutorial/constant';
+import Content from './Tutorial/Content/Content';
 
 function App() {
   const [currentActiveTab, setCurrentActiveTab] = useState("introduction");
