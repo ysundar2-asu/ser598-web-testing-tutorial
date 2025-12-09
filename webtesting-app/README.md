@@ -1,70 +1,153 @@
-# Getting Started with Create React App
+# SER598 - Web Testing Tutorial
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive, comprehensive web testing tutorial platform built with React, designed to teach modern web testing practices through hands-on examples, quizzes, and a fully functional demo application.
 
-## Available Scripts
+## Course Information
 
-In the project directory, you can run:
+**Course**: SER598 - Web Based Application  
+**Institution**: Arizona State University  
+**Project Type**: Educational Tutorial Platform on Web Application Testing
 
-### `npm start`
+## Team Members
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Yashwanth Sundhar Sundaramoorthy** - ysundar2@asu.edu
+- **Tharun Moongil Rajan** - tmoongil@asu.edu
+- **Sai Kiran Reddy Koppula** - skris179@asu.edu
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Overview
 
-### `npm test`
+This project is an interactive learning platform that teaches web testing fundamentals and best practices. It features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **15 Interactive Tutorial Modules** covering all aspects of web testing
+- **Demo E-Commerce Application** for hands-on practice
+- **Real-world Testing Examples** using Jest, Playwright, and Newman
+- **Interactive Quiz System** to reinforce learning
+- **Progress Tracking** to monitor completion
+- **Comprehensive Test Suite** demonstrating best practices
 
-### `npm run build`
+## Quick Start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Navigate to the application directory
+cd webtesting-app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Install dependencies
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Start the development server
+npm start
+```
 
-### `npm run eject`
+The application will open at [http://localhost:3000](http://localhost:3000)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tutorial Content
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Core Modules (15 Completable Topics)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. **Introduction** - Overview of web testing
+2. **Learning Outcomes** - What you'll learn
+3. **What is Web Testing?** - Fundamentals and concepts
+4. **Types of Web Testing** - Unit, Integration, E2E, etc.
+5. **Tools Overview** - Jest, Playwright, Newman, Lighthouse
+6. **React App Setup** - Environment setup
+7. **Jest Unit Testing & RTL** - Component testing
+8. **Playwright E2E Testing** - Browser automation
+9. **Lighthouse Audits** - Performance & accessibility
+10. **Server-Side & API Testing** - API validation
+11. **Best Practices** - Industry standards
+12. **History of Web Testing** - Evolution of testing
+13. **Analytical Component** - Pros & cons analysis
+14. **References** - Additional reading
+15. **Additional Resources** - Tools & documentation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Bonus Module
 
-## Learn More
+- **Demo - E-Commerce Website** - Interactive hands-on practice
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Testing Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Unit Testing (Jest + React Testing Library)
+- Component rendering tests
+- User interaction simulation
+- State management validation
+- API mocking
 
-### Code Splitting
+### End-to-End Testing (Playwright)
+- Full user workflow validation
+- Cross-browser testing
+- Visual regression testing
+- Network interception
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### API Testing (Newman)
+- Endpoint validation
+- Response time checks
+- Data structure verification
+- Automated test reports
 
-### Analyzing the Bundle Size
+### Performance & Accessibility (Lighthouse)
+- Performance metrics (LCP, FID, CLS)
+- Accessibility compliance
+- SEO optimization
+- Best practices validation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Technologies
 
-### Making a Progressive Web App
+- **Frontend**: React, Ant Design, SCSS
+- **Testing**: Jest, React Testing Library, Playwright, Newman, Lighthouse
+- **API**: FakeStoreAPI
+- **Build Tool**: Create React App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📂 Project Structure
 
-### Advanced Configuration
+```
+ser598-web-testing-tutorial/
+└── webtesting-app/
+    ├── src/
+    │   ├── Components/      # Reusable UI components
+    │   ├── Demo/           # Demo e-commerce app
+    │   ├── Tutorial/       # Tutorial content & logic
+    │   └── Images/         # Screenshots & images
+    ├── e2e-tests/          # Playwright tests
+    ├── api-tests/          # Newman API tests
+    └── public/             # Static assets
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Running Tests
 
-### Deployment
+```bash
+# Unit tests
+npm test
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# E2E tests
+npm run test:e2e
 
-### `npm run build` fails to minify
+# API tests
+npm run test:api
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# All tests
+npm run test:all
+```
+
+## Learning Objectives
+
+Students will learn to:
+
+- Write effective unit tests for React components
+- Implement end-to-end testing workflows
+- Validate APIs with automated tests
+- Conduct performance and accessibility audits
+- Apply testing best practices
+- Build comprehensive testing strategies
+
+## Key Features
+
+Interactive step-by-step tutorials  
+Real-world code examples  
+Hands-on demo application  
+Interactive quizzes with feedback  
+Progress tracking system  
+Comprehensive test coverage  
+Professional test reports  
+Modern testing tools & frameworks  
+
+
