@@ -43,10 +43,10 @@ function Header(props) {
           {TEAM_MEMEBERS_LIST.map((val, index) => (
             <>
               <div className="teamMember_Info" key={val.id || index}>
-                <div className="imageContainer"></div>
+                <div className="imageContainer"><span className="memberName">{val.imgAlt}</span></div>
                 <div className="nameContainer">
                   <span className="teamMember_Name">{val.name}</span>
-                  <span>ASU ID : {val.asuID}</span>
+                  <span>Email ID : {val.asuID}</span>
                 </div>
               </div>
             </>

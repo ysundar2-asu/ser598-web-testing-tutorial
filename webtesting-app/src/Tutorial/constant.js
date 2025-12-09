@@ -2,17 +2,20 @@ export const TEAM_MEMEBERS_LIST = [
   {
     id: 1,
     name: "Yashwanth Sundhar Sundaramoorthy",
-    asuID: "1233862554",
+    asuID: "ysundar2@asu.edu",
+    imgAlt: "YS"
   },
   {
     id: 2,
     name: "Tejeshwar Moongilmada Krishnaswamy",
-    asuID: "1233862554",
+    asuID: "tmoongil@asu.edu",
+    imgAlt: "TM"
   },
   {
     id: 3,
     name: "Sai Krishnan",
-    asuID: "1233862554",
+    asuID: "skris179@asu.edu",
+    imgAlt: "SK"
   },
 ];
 
