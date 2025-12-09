@@ -66,8 +66,6 @@ describe('ProductCard Component', () => {
 
     const viewButton = screen.getByText('View');
     fireEvent.click(viewButton);
-
-    // Modal should show product description
     expect(screen.getByText('This is a test product description')).toBeInTheDocument();
   });
 
@@ -77,9 +75,7 @@ describe('ProductCard Component', () => {
 
     fireEvent.click(screen.getByText('View'));
 
-    // Check modal content
     expect(screen.getByText('This is a test product description')).toBeInTheDocument();
-    // Price should appear in modal (there will be two - one in card, one in modal)
     const prices = screen.getAllByText('$29.99');
     expect(prices.length).toBeGreaterThanOrEqual(1);
   });
@@ -131,19 +127,14 @@ describe('ProductCard Component', () => {
     const mockOnAddToCart = jest.fn();
     render(<ProductCard {...mockProduct} onAddToCart={mockOnAddToCart} />);
 
-    // Open modal
     fireEvent.click(screen.getByText('View'));
 
-    // Change quantity
     const quantityInput = screen.getByRole('spinbutton');
     fireEvent.change(quantityInput, { target: { value: '3' } });
-
-    // Add to cart from modal (there are 2 "Add to Cart" buttons - one on card, one in modal)
     const addToCartButtons = screen.getAllByText('Add to Cart');
-    // The second one is in the modal footer
+
     fireEvent.click(addToCartButtons[1]);
 
-    // Verify onAddToCart was called with quantity 3
     expect(mockOnAddToCart).toHaveBeenCalledWith(
       {
         id: 1,
@@ -156,22 +147,17 @@ describe('ProductCard Component', () => {
     );
   });
 
-  // Test 12: Resets quantity when modal is cancelled
   test('resets quantity to 1 when modal is cancelled', () => {
     render(<ProductCard {...mockProduct} />);
 
     // Open modal
     fireEvent.click(screen.getByText('View'));
-
-    // Change quantity
     const quantityInput = screen.getByRole('spinbutton');
     fireEvent.change(quantityInput, { target: { value: '7' } });
 
-    // Cancel modal
     const cancelButton = screen.getByText('Cancel');
     fireEvent.click(cancelButton);
 
-    // Reopen modal
     fireEvent.click(screen.getByText('View'));
 
     const newQuantityInput = screen.getByRole('spinbutton');
@@ -189,7 +175,6 @@ describe('ProductCard Component', () => {
   test('image is displayed correctly', () => {
     render(<ProductCard {...mockProduct} />);
 
-    // Verify image exists and has correct attributes
     const image = screen.getByAltText('Test Product');
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', 'https://example.com/image.jpg');
@@ -199,7 +184,6 @@ describe('ProductCard Component', () => {
   test('has productDetails section with correct structure', () => {
     render(<ProductCard {...mockProduct} />);
 
-    // Verify all product details are present
     const title = screen.getByText('Test Product');
     const price = screen.getByText('$29.99');
     const rating = screen.getByText('Rating: 4.5');
@@ -208,7 +192,6 @@ describe('ProductCard Component', () => {
     expect(price).toBeInTheDocument();
     expect(rating).toBeInTheDocument();
 
-    // Verify they have correct classes
     expect(title).toHaveClass('title');
     expect(price).toHaveClass('price');
     expect(rating).toHaveClass('rating');
@@ -218,7 +201,6 @@ describe('ProductCard Component', () => {
   test('displays both action buttons', () => {
     render(<ProductCard {...mockProduct} />);
 
-    // Verify both buttons exist and are clickable
     const addToCartButton = screen.getByRole('button', { name: 'Add to Cart' });
     const viewButton = screen.getByRole('button', { name: 'View' });
 
@@ -232,7 +214,6 @@ describe('ProductCard Component', () => {
 
     fireEvent.click(screen.getByText('View'));
 
-    // Modal title should be the product title
     expect(screen.getAllByText('Test Product').length).toBeGreaterThan(1);
   });
 
@@ -242,7 +223,6 @@ describe('ProductCard Component', () => {
 
     fireEvent.click(screen.getByText('View'));
 
-    // There should be multiple images (one in card, one in modal)
     const images = screen.getAllByAltText('Test Product');
     expect(images.length).toBeGreaterThan(1);
   });

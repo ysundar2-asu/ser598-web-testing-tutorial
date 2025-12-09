@@ -132,15 +132,10 @@ describe('HomePage Component', () => {
     await waitFor(() => {
       expect(screen.getByText('Product 1')).toBeInTheDocument();
     });
-
-    // Initially cart should be empty
     expect(screen.getByText('Cart (0)')).toBeInTheDocument();
 
-    // Click Add to Cart on first product
     const addToCartButtons = screen.getAllByText('Add to Cart');
     fireEvent.click(addToCartButtons[0]);
-
-    // Cart count should increase
     await waitFor(() => {
       expect(screen.getByText('Cart (1)')).toBeInTheDocument();
     });
@@ -154,11 +149,9 @@ describe('HomePage Component', () => {
       expect(screen.getByText('Product 1')).toBeInTheDocument();
     });
 
-    // Add product to cart
     const addToCartButtons = screen.getAllByText('Add to Cart');
     fireEvent.click(addToCartButtons[0]);
 
-    // Open cart drawer
     await waitFor(() => {
       const cartButton = screen.getByText('Cart (1)');
       fireEvent.click(cartButton);
@@ -178,23 +171,19 @@ describe('HomePage Component', () => {
       expect(screen.getByText('Product 1')).toBeInTheDocument();
     });
 
-    // Add product to cart
     const addToCartButtons = screen.getAllByText('Add to Cart');
     fireEvent.click(addToCartButtons[0]);
 
-    // Open cart drawer
     await waitFor(() => {
       const cartButton = screen.getByText('Cart (1)');
       fireEvent.click(cartButton);
     });
 
-    // Click Remove button
     await waitFor(() => {
       const removeButton = screen.getByText('Remove');
       fireEvent.click(removeButton);
     });
 
-    // Cart should be empty
     await waitFor(() => {
       expect(screen.getByText('Your cart is empty')).toBeInTheDocument();
     });
@@ -216,15 +205,12 @@ describe('HomePage Component', () => {
     const cartButton = screen.getByText('Cart (1)');
     fireEvent.click(cartButton);
 
-    // Verify total is displayed correctly
     await waitFor(() => {
       expect(screen.getByText('Total:')).toBeInTheDocument();
     });
 
-    // Verify the total amount is correct (using getAllByText and checking the last one which is in the cart)
     const priceElements = screen.getAllByText('$19.99');
     expect(priceElements.length).toBeGreaterThan(0);
-    // The last occurrence should be in the cart total
     expect(priceElements[priceElements.length - 1]).toBeInTheDocument();
   });
 
@@ -233,15 +219,11 @@ describe('HomePage Component', () => {
   test('does not submit login with empty credentials', () => {
     render(<HomePage />);
 
-    // Click Login button
     const loginButton = screen.getByText('Login');
     fireEvent.click(loginButton);
 
-    // Try to submit without filling credentials
     const loginSubmitButton = screen.getAllByText('Login')[1];
     fireEvent.click(loginSubmitButton);
-
-    // Modal should still be open (login should not succeed)
     expect(screen.getByPlaceholderText('Username')).toBeInTheDocument();
   });
 
@@ -253,7 +235,6 @@ describe('HomePage Component', () => {
       expect(screen.getByText('Product 1')).toBeInTheDocument();
     });
 
-    // All products should be visible initially
     expect(screen.getByText('Product 1')).toBeInTheDocument();
     expect(screen.getByText('Product 2')).toBeInTheDocument();
     expect(screen.getByText('Product 3')).toBeInTheDocument();
@@ -267,38 +248,27 @@ describe('HomePage Component', () => {
       expect(screen.getByText('Product 1')).toBeInTheDocument();
     });
 
-    // Add same product twice
     const addToCartButtons = screen.getAllByText('Add to Cart');
     fireEvent.click(addToCartButtons[0]);
     fireEvent.click(addToCartButtons[0]);
 
-    // Cart count should still show 1 item (unique items, not total quantity)
     await waitFor(() => {
       expect(screen.getByText('Cart (1)')).toBeInTheDocument();
     });
 
-    // Open cart to verify quantity is 2
     const cartButton = screen.getByText('Cart (1)');
     fireEvent.click(cartButton);
   });
 
   // Test 16: Handles API error gracefully
   test('handles product fetch error gracefully', async () => {
-    // Suppress console.error for this test
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    // Override fetch to return error
     global.fetch = jest.fn(() => Promise.reject(new Error('API Error')));
-
     render(<HomePage />);
-
-    // Wait for error to be handled
     await waitFor(() => {
-      // Component should still render without crashing
       expect(screen.getByText('ECommerce Website')).toBeInTheDocument();
     });
 
-    // Verify console.error was called with the error
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       'Error fetching products:',
       expect.any(Error)

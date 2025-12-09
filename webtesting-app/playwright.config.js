@@ -49,7 +49,7 @@ module.exports = defineConfig({
     },
   ],
 
-  /* Run your local dev server before starting the tests */
+  /* Run the local server initally */
   webServer: {
     command: 'npm start',
     url: 'http://localhost:3000',
