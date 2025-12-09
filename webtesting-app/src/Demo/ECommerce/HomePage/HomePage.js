@@ -23,8 +23,12 @@ export default function HomePage() {
         setProductList(data);
         setFilteredProductList(data);
         setShowLoader(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching products:', error);
+        setShowLoader(false);
       });
-    
+
   }, []);
 
   const handleOnChange = useCallback((productCategory)=> {
@@ -94,6 +98,7 @@ export default function HomePage() {
         <div className="filterSection">
           <span>Categories</span>
           <Select 
+          data-testid="category-select"
           defaultValue={PRODUCT_CATEGORIES[0].value}
           style={{width: "20rem"}}
           options={PRODUCT_CATEGORIES}
@@ -120,7 +125,7 @@ export default function HomePage() {
       open={showCartDrawer}
       onClose={() => setShowCartDrawer(false)}
       className="cartDrawer"
-      width={500}
+      size="large"
     >
       <div className="cartDrawerContent">
         {cartItems.length === 0 ? (

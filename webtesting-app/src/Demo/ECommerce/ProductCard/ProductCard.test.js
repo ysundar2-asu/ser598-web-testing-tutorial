@@ -84,21 +84,6 @@ describe('ProductCard Component', () => {
     expect(prices.length).toBeGreaterThanOrEqual(1);
   });
 
-  // Test 7: Modal closes when Cancel is clicked
-  test('closes modal when Cancel button is clicked', async () => {
-    render(<ProductCard {...mockProduct} />);
-
-    // Open modal
-    fireEvent.click(screen.getByText('View'));
-    expect(screen.getByText('This is a test product description')).toBeInTheDocument();
-
-    // Close modal
-    const cancelButton = screen.getByText('Cancel');
-    fireEvent.click(cancelButton);
-    expect(screen.getByText('This is a test product description')).toBeInTheDocument();
-
-  });
-
   // Test 8: Does not crash when onAddToCart is not provided
   test('does not crash when onAddToCart prop is not provided', () => {
     render(<ProductCard {...mockProduct} />);
@@ -112,8 +97,9 @@ describe('ProductCard Component', () => {
   // Test 9: Product card has correct CSS class
   test('has productCard class', () => {
     const { container } = render(<ProductCard {...mockProduct} />);
-    
-    expect(container.querySelector('.productCard')).toBeInTheDocument();
+
+    const productCard = container.firstChild;
+    expect(productCard).toHaveClass('productCard');
   });
 
   // Test 10: Quantity defaults to 1
@@ -124,6 +110,141 @@ describe('ProductCard Component', () => {
 
     const quantityInput = screen.getByRole('spinbutton');
     expect(quantityInput).toHaveValue('1');
+  });
+
+  // Test 11: Changes quantity in modal
+  test('allows changing quantity in modal', () => {
+    render(<ProductCard {...mockProduct} />);
+
+    fireEvent.click(screen.getByText('View'));
+
+    const quantityInput = screen.getByRole('spinbutton');
+
+    // Change quantity to 5
+    fireEvent.change(quantityInput, { target: { value: '5' } });
+
+    expect(quantityInput).toHaveValue('5');
+  });
+
+  // Test 12: Adds product with custom quantity from modal
+  test('adds product with custom quantity when added from modal', () => {
+    const mockOnAddToCart = jest.fn();
+    render(<ProductCard {...mockProduct} onAddToCart={mockOnAddToCart} />);
+
+    // Open modal
+    fireEvent.click(screen.getByText('View'));
+
+    // Change quantity
+    const quantityInput = screen.getByRole('spinbutton');
+    fireEvent.change(quantityInput, { target: { value: '3' } });
+
+    // Add to cart from modal (there are 2 "Add to Cart" buttons - one on card, one in modal)
+    const addToCartButtons = screen.getAllByText('Add to Cart');
+    // The second one is in the modal footer
+    fireEvent.click(addToCartButtons[1]);
+
+    // Verify onAddToCart was called with quantity 3
+    expect(mockOnAddToCart).toHaveBeenCalledWith(
+      {
+        id: 1,
+        title: 'Test Product',
+        price: 29.99,
+        image: 'https://example.com/image.jpg',
+        description: 'This is a test product description',
+      },
+      3
+    );
+  });
+
+  // Test 14: Resets quantity when modal is cancelled
+  test('resets quantity to 1 when modal is cancelled', () => {
+    render(<ProductCard {...mockProduct} />);
+
+    // Open modal
+    fireEvent.click(screen.getByText('View'));
+
+    // Change quantity
+    const quantityInput = screen.getByRole('spinbutton');
+    fireEvent.change(quantityInput, { target: { value: '7' } });
+
+    // Cancel modal
+    const cancelButton = screen.getByText('Cancel');
+    fireEvent.click(cancelButton);
+
+    // Reopen modal
+    fireEvent.click(screen.getByText('View'));
+
+    const newQuantityInput = screen.getByRole('spinbutton');
+    expect(newQuantityInput).toHaveValue('1');
+  });
+
+  // Test 15: Displays rating count
+  test('displays rating information correctly', () => {
+    render(<ProductCard {...mockProduct} />);
+
+    expect(screen.getByText('Rating: 4.5')).toBeInTheDocument();
+  });
+
+  // Test 16: Image is displayed correctly
+  test('image is displayed correctly', () => {
+    render(<ProductCard {...mockProduct} />);
+
+    // Verify image exists and has correct attributes
+    const image = screen.getByAltText('Test Product');
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', 'https://example.com/image.jpg');
+  });
+
+  // Test 17: Product details section exists
+  test('has productDetails section with correct structure', () => {
+    render(<ProductCard {...mockProduct} />);
+
+    // Verify all product details are present
+    const title = screen.getByText('Test Product');
+    const price = screen.getByText('$29.99');
+    const rating = screen.getByText('Rating: 4.5');
+
+    expect(title).toBeInTheDocument();
+    expect(price).toBeInTheDocument();
+    expect(rating).toBeInTheDocument();
+
+    // Verify they have correct classes
+    expect(title).toHaveClass('title');
+    expect(price).toHaveClass('price');
+    expect(rating).toHaveClass('rating');
+  });
+
+  // Test 18: Action buttons are displayed
+  test('displays both action buttons', () => {
+    render(<ProductCard {...mockProduct} />);
+
+    // Verify both buttons exist and are clickable
+    const addToCartButton = screen.getByRole('button', { name: 'Add to Cart' });
+    const viewButton = screen.getByRole('button', { name: 'View' });
+
+    expect(addToCartButton).toBeInTheDocument();
+    expect(viewButton).toBeInTheDocument();
+  });
+
+  // Test 19: Modal has correct title
+  test('modal displays product title as header', () => {
+    render(<ProductCard {...mockProduct} />);
+
+    fireEvent.click(screen.getByText('View'));
+
+    // Modal title should be the product title
+    expect(screen.getAllByText('Test Product').length).toBeGreaterThan(1);
+  });
+
+  // Test 20: Modal shows product image
+  test('modal displays product image', () => {
+    render(<ProductCard {...mockProduct} />);
+
+    fireEvent.click(screen.getByText('View'));
+
+    // There should be multiple images (one in card, one in modal)
+    const images = screen.getAllByAltText('Test Product');
+    expect(images.length).toBeGreaterThan(1);
   });
 });
 

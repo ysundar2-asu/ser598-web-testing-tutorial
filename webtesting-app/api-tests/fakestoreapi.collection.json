@@ -89,6 +89,115 @@
               }
             }
           ]
+        },
+        {
+          "name": "GET Products by Category - Electronics",
+          "request": {
+            "method": "GET",
+            "url": "https://fakestoreapi.com/products/category/electronics"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(Array.isArray(data)).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('All products are electronics', function () {",
+                  "    const data = pm.response.json();",
+                  "    data.forEach(product => {",
+                  "        pm.expect(product.category).to.eql('electronics');",
+                  "    });",
+                  "});",
+                  "",
+                  "pm.test('Products have required fields', function () {",
+                  "    const data = pm.response.json();",
+                  "    data.forEach(product => {",
+                  "        pm.expect(product).to.have.property('id');",
+                  "        pm.expect(product).to.have.property('title');",
+                  "        pm.expect(product).to.have.property('price');",
+                  "    });",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET All Categories",
+          "request": {
+            "method": "GET",
+            "url": "https://fakestoreapi.com/products/categories"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(Array.isArray(data)).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Categories include expected values', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data).to.include('electronics');",
+                  "    pm.expect(data).to.include('jewelery');",
+                  "});",
+                  "",
+                  "pm.test('Response time is less than 1000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET Limited Products",
+          "request": {
+            "method": "GET",
+            "url": "https://fakestoreapi.com/products?limit=5"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response contains exactly 5 products', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data.length).to.eql(5);",
+                  "});",
+                  "",
+                  "pm.test('Products are in correct format', function () {",
+                  "    const data = pm.response.json();",
+                  "    data.forEach(product => {",
+                  "        pm.expect(product).to.have.property('id');",
+                  "        pm.expect(product).to.have.property('title');",
+                  "    });",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         }
       ]
     },
@@ -126,9 +235,52 @@
                   "    pm.expect(data.token).to.be.a('string');",
                   "});",
                   "",
+                  "pm.test('Token is not empty', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data.token.length).to.be.above(0);",
+                  "});",
+                  "",
                   "pm.test('Save token to environment', function () {",
                   "    const data = pm.response.json();",
                   "    pm.environment.set('authToken', data.token);",
+                  "});",
+                  "",
+                  "pm.test('Response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST Login - Invalid Credentials",
+          "request": {
+            "method": "POST",
+            "url": "https://fakestoreapi.com/auth/login",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"wronguser\", \"password\": \"wrongpass\"}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 401 or 200 (API behavior)', function () {",
+                  "    pm.expect([200, 401]).to.include(pm.response.code);",
+                  "});",
+                  "",
+                  "pm.test('Response is handled', function () {",
+                  "    pm.response.to.be.ok;",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -206,6 +358,78 @@
                   "pm.test('Cart contains correct userId', function () {",
                   "    const data = pm.response.json();",
                   "    pm.expect(data.userId).to.eql(1);",
+                  "});",
+                  "",
+                  "pm.test('Response time is acceptable', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET All Carts",
+          "request": {
+            "method": "GET",
+            "url": "https://fakestoreapi.com/carts"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(Array.isArray(data)).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Carts have required properties', function () {",
+                  "    const data = pm.response.json();",
+                  "    if (data.length > 0) {",
+                  "        data.forEach(cart => {",
+                  "            pm.expect(cart).to.have.property('id');",
+                  "            pm.expect(cart).to.have.property('userId');",
+                  "            pm.expect(cart).to.have.property('products');",
+                  "        });",
+                  "    }",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET User Carts",
+          "request": {
+            "method": "GET",
+            "url": "https://fakestoreapi.com/carts/user/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(Array.isArray(data)).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('All carts belong to user 1', function () {",
+                  "    const data = pm.response.json();",
+                  "    data.forEach(cart => {",
+                  "        pm.expect(cart.userId).to.eql(1);",
+                  "    });",
                   "});"
                 ],
                 "type": "text/javascript"

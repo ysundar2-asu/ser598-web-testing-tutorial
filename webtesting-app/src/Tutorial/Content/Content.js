@@ -105,14 +105,26 @@ export default function Content(props) {
                   <div key={index} className="sectionItem">
                     <span className="contentSubtitle">{data.subtitle}</span>
                     <p>{data.text}</p>
-                    {data.example && (
+                    {data.example && !data.image && (
                       <div className="exampleBlock">
                         <span className="exampleText">{data.example}</span>
                       </div>
                     )}
-                    {data.code && (
-                      <div className="codeBlock">
-                        <pre><code>{data.code}</code></pre>
+                    {(data.code || data.image) && (
+                      <div className="sectionExampleContent">
+                        {data.code && (
+                          <div className="codeBlock">
+                            <pre><code>{data.code}</code></pre>
+                          </div>
+                        )}
+                        {data.image && (
+                          <div className="sectionImage">
+                            <img src={data.image} alt={data.imageAlt || data.subtitle || "Section example"} />
+                            {data.imageCaption && (
+                              <p className="imageCaption">{data.imageCaption}</p>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -124,11 +136,18 @@ export default function Content(props) {
                 {example.description && (
                   <p className="exampleDescription">{example.description}</p>
                 )}
-                {example.code && (
-                  <div className="codeBlock">
-                    <pre><code>{example.code}</code></pre>
-                  </div>
-                )}
+                <div className="exampleContent">
+                  {example.code && (
+                    <div className="codeBlock">
+                      <pre><code>{example.code}</code></pre>
+                    </div>
+                  )}
+                  {example.image && (
+                    <div className="exampleImage">
+                      <img src={example.image} alt={example.imageAlt || "Example"} />
+                    </div>
+                  )}
+                </div>
               </div>
             )}
             {code && (
