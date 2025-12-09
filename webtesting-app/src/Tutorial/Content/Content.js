@@ -132,7 +132,7 @@ export default function Content(props) {
                     )}
                     {data.image && (
                       <div className="sectionImage">
-                        <img src={data.image} alt={data.imageAlt || data.subtitle || "Section example"} />
+                        <img src={data.image} alt={data.imageAlt || data.subtitle || "Section example"} className="sectionSourceImage" style={{ width: "40rem", height: "auto" }} />
                         {data.imageCaption && (
                           <p className="imageCaption">{data.imageCaption}</p>
                         )}
