@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header completedTopics={completedTopics} totalTopics={TUTORIAL_CONTENT_HEADINGS.length} />
       <div className='applicationBody'>
       <div className='applicationSideNav'>
       <SideBar tabs={TUTORIAL_CONTENT_HEADINGS} currentActiveTab={currentActiveTab} onChangeTab={handleTabChange} completedTopics={completedTopics}/>

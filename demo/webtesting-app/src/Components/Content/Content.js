@@ -14,6 +14,9 @@ export default function Content(props) {
     type,
     isQuizCompleted,
     isPreviousButtonDisabled,
+    example,
+    code,
+    links,
   } = content;
 
   const [openQuiz, setOpenQuiz] = useState(false);
@@ -78,30 +81,82 @@ export default function Content(props) {
         <div className="contentTitle">
           <span className="contentTitleText">{title}</span>
         </div>
-        {type === "paragraphs" && (
-          <div className="contentParagraphs">
-            {paragraphs.map((data, index) => (
-              <p key={index}>{data}</p>
-            ))}
-          </div>
-        )}
-        {type === "bullets" && (
-          <div className="contentBullets">
-            <ul>
-              {bullets.map((data, index) => (
-                <li key={index}>{data}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {type === "sections" && (
-          <div className="contentSections">
-            {sections.map((data, index) => (
-              <div key={index}>
-                <span className="contentSubtitle">{data.subtitle}</span>
-                <p>{data.text}</p>
+        {type !== "component" && (
+          <div className="contentBody">
+            {(type === "paragraphs" || type === "multiple") && paragraphs && (
+              <div className="contentParagraphs">
+                {paragraphs.map((data, index) => (
+                  <p key={index}>{data}</p>
+                ))}
               </div>
-            ))}
+            )}
+            {(type === "bullets" || type === "multiple") && bullets && (
+              <div className="contentBullets">
+                <ul>
+                  {bullets.map((data, index) => (
+                    <li key={index}>{data}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {(type === "sections" || type === "multiple") && sections && (
+              <div className="contentSections">
+                {sections.map((data, index) => (
+                  <div key={index} className="sectionItem">
+                    <span className="contentSubtitle">{data.subtitle}</span>
+                    <p>{data.text}</p>
+                    {data.example && (
+                      <div className="exampleBlock">
+                        <span className="exampleText">{data.example}</span>
+                      </div>
+                    )}
+                    {data.code && (
+                      <div className="codeBlock">
+                        <pre><code>{data.code}</code></pre>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+            {example && (
+              <div className="topLevelExample">
+                {example.description && (
+                  <p className="exampleDescription">{example.description}</p>
+                )}
+                {example.code && (
+                  <div className="codeBlock">
+                    <pre><code>{example.code}</code></pre>
+                  </div>
+                )}
+              </div>
+            )}
+            {code && (
+              <div className="topLevelCode">
+                {code.description && (
+                  <p className="codeDescription">{code.description}</p>
+                )}
+                {code.snippet && (
+                  <div className="codeBlock">
+                    <pre><code>{code.snippet}</code></pre>
+                  </div>
+                )}
+              </div>
+            )}
+            {links && links.length > 0 && (
+              <div className="contentLinks">
+                <span className="linksLabel">Useful Links:</span>
+                <ul>
+                  {links.map((link, index) => (
+                    <li key={index}>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
         {type === "component" && (

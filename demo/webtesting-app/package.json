@@ -19,7 +19,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:api": "node api-tests/run-api-tests.js",
+    "test:api:cli": "newman run api-tests/fakestoreapi.collection.json -e api-tests/environment.json",
+    "test:all": "npm run test:api && npm test -- --watchAll=false"
   },
   "eslintConfig": {
     "extends": [
@@ -38,5 +41,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@rc-component/picker(.*)$": "<rootDir>/src/__mocks__/rcPickerMock.js"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(antd|@ant-design|rc-.*|@rc-component)/)"
+    ]
+  },
+  "devDependencies": {
+    "@rc-component/picker": "^1.8.0",
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
   }
 }

@@ -1,18 +1,24 @@
 .contentWrapper {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 
   .content {
     width: 100%;
-    height: 90%;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 1rem;
+
     .contentTitle {
       width: 100%;
       height: 3rem;
       display: flex;
       align-items: center;
-
       padding-left: 2rem;
       border-bottom: 0.2rem solid black;
+      margin-bottom: 0.5rem;
+
       .contentTitleText {
         font-size: 1.5rem;
         font-weight: bold;
@@ -20,32 +26,169 @@
       }
     }
 
+    .contentBody {
+      padding: 1.5rem 2rem;
+    }
+
     .contentParagraphs {
       width: 100%;
-      height: auto;
-      padding: 2rem;
-      line-height: 1.5;
-      font-size: 1.1rem;
+
+      p {
+        margin: 0 0 1rem 0;
+        line-height: 1.7;
+        font-size: 1.05rem;
+        color: #333;
+        text-align: justify;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
 
     .contentBullets {
       width: 100%;
-      height: auto;
-      padding: 2rem;
-      line-height: 1.5;
-      font-size: 1.1rem;
+      margin-top: 1rem;
+
+      ul {
+        margin: 0;
+        padding-left: 1.5rem;
+
+        li {
+          margin-bottom: 0.5rem;
+          line-height: 1.6;
+          font-size: 1.05rem;
+          color: #333;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
     }
 
     .contentSections {
       width: 100%;
-      height: auto;
-      padding: 2rem;
-      line-height: 1.5;
-      font-size: 1.1rem;
+
+      .sectionItem {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #e8e8e8;
+
+        &:last-child {
+          margin-bottom: 0;
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+      }
+
+      .contentSubtitle {
+        font-weight: 600;
+        font-size: 1.15rem;
+        color: #1a1a1a;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin: 0 0 0.75rem 0;
+        line-height: 1.6;
+        font-size: 1.05rem;
+        color: #333;
+      }
+
+      .exampleBlock {
+        background-color: #2d2d2d;
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.75rem;
+
+        .exampleText {
+          color: #a5d6a7;
+          font-size: 0.95rem;
+          font-style: italic;
+        }
+      }
+
+      .codeBlock {
+        background-color: #1e1e1e;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 0.75rem;
+
+        pre {
+          margin: 0;
+          padding: 1rem;
+          overflow-x: auto;
+
+          code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #d4d4d4;
+            white-space: pre;
+          }
+        }
+      }
     }
 
-    .contentSubtitle {
-      font-weight: bold;
+    .contentComponent {
+      width: 100%;
+      height: 100%;
+    }
+
+    .topLevelExample,
+    .topLevelCode {
+      margin-top: 1.5rem;
+
+      .exampleDescription,
+      .codeDescription {
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+        font-size: 1.05rem;
+      }
+    }
+
+    .contentLinks {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background-color: #f9f9f9;
+      border-radius: 6px;
+      border: 1px solid #e8e8e8;
+
+      .linksLabel {
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: #1a1a1a;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.25rem;
+
+        li {
+          margin-bottom: 0.4rem;
+          line-height: 1.5;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          a {
+            color: #1890ff;
+            text-decoration: none;
+            font-size: 1rem;
+
+            &:hover {
+              text-decoration: underline;
+              color: #40a9ff;
+            }
+          }
+        }
+      }
     }
   }
 

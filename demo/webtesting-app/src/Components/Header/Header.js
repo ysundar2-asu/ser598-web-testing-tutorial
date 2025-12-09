@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from "react";
 import "./Header.scss";
 import CustomButton from "../CustomButton/CustomButton";
-import { Drawer } from "antd";
+import { Drawer, Progress } from "antd";
 import { TEAM_MEMEBERS_LIST } from "../../constant";
 
-function Header() {
+function Header(props) {
+  const { completedTopics = [], totalTopics = 0 } = props;
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleOnClick = useCallback(() => {
@@ -15,10 +16,16 @@ function Header() {
     setOpenDrawer(false);
   }, []);
 
+  const progressPercent = totalTopics > 0 ? Math.round((completedTopics.length / totalTopics) * 100) : 0;
+
   return (
     <div className="appHeader">
       <div className="leftSection">
         <span className="headerText">SER-598 Web Testing Tutorial</span>
+        <div className="progressSection">
+          <span className="progressLabel">Modules Completed: {completedTopics.length}/{totalTopics}</span>
+          <Progress percent={progressPercent} size="small" strokeColor="#52c41a" />
+        </div>
       </div>
 
       <div className="rightSection">

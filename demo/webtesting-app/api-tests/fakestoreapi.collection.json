@@ -1,0 +1,220 @@
+{
+  "info": {
+    "name": "FakeStoreAPI Tests",
+    "_postman_id": "fakestoreapi-tests-collection",
+    "description": "API tests for FakeStoreAPI endpoints used in the eCommerce app",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "GET All Products",
+          "request": {
+            "method": "GET",
+            "url": "https://fakestoreapi.com/products"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response time is less than 2000ms', function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(Array.isArray(data)).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Products have required fields', function () {",
+                  "    const data = pm.response.json();",
+                  "    data.forEach(product => {",
+                  "        pm.expect(product).to.have.property('id');",
+                  "        pm.expect(product).to.have.property('title');",
+                  "        pm.expect(product).to.have.property('price');",
+                  "        pm.expect(product).to.have.property('image');",
+                  "        pm.expect(product).to.have.property('category');",
+                  "    });",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET Single Product",
+          "request": {
+            "method": "GET",
+            "url": "https://fakestoreapi.com/products/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Product has correct id', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data.id).to.eql(1);",
+                  "});",
+                  "",
+                  "pm.test('Product has all required properties', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data).to.have.property('id');",
+                  "    pm.expect(data).to.have.property('title');",
+                  "    pm.expect(data).to.have.property('price');",
+                  "    pm.expect(data).to.have.property('description');",
+                  "    pm.expect(data).to.have.property('category');",
+                  "    pm.expect(data).to.have.property('image');",
+                  "    pm.expect(data).to.have.property('rating');",
+                  "});",
+                  "",
+                  "pm.test('Price is a positive number', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data.price).to.be.above(0);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "POST Login - Valid Credentials",
+          "request": {
+            "method": "POST",
+            "url": "https://fakestoreapi.com/auth/login",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"johnd\", \"password\": \"m38rmF$\"}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response contains token', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data).to.have.property('token');",
+                  "    pm.expect(data.token).to.be.a('string');",
+                  "});",
+                  "",
+                  "pm.test('Save token to environment', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.environment.set('authToken', data.token);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "item": [
+        {
+          "name": "GET Cart by ID",
+          "request": {
+            "method": "GET",
+            "url": "https://fakestoreapi.com/carts/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Cart has required properties', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data).to.have.property('id');",
+                  "    pm.expect(data).to.have.property('userId');",
+                  "    pm.expect(data).to.have.property('products');",
+                  "});",
+                  "",
+                  "pm.test('Products is an array', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(Array.isArray(data.products)).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST Add to Cart",
+          "request": {
+            "method": "POST",
+            "url": "https://fakestoreapi.com/carts",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"userId\": 1, \"date\": \"2024-01-01\", \"products\": [{\"productId\": 1, \"quantity\": 2}]}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Cart is created with id', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data).to.have.property('id');",
+                  "});",
+                  "",
+                  "pm.test('Cart contains correct userId', function () {",
+                  "    const data = pm.response.json();",
+                  "    pm.expect(data.userId).to.eql(1);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
